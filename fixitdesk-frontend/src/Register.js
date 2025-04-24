@@ -21,6 +21,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
+      console.log("Sending form data:", formData);
       const response = await fetch(`${API_URL}/api/accounts/register/`, {
         method: "POST",
         headers: {

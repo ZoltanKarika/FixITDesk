@@ -19,9 +19,8 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
   frontend:
-    build: ./frontend
+    build: ./fixitdesk-frontend
     container_name: fixitdesk-frontend
     ports:
       - "3000:3000"
@@ -29,6 +28,5 @@ services:
       - web
     environment:
       - REACT_APP_API_URL=http://web:8000
-
 volumes:
   postgres_data:
