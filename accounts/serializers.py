@@ -29,17 +29,11 @@ class UserSerializer(serializers.ModelSerializer):
         exclude = ('password', )  # Exclude the password field from serialization
 
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-    def validate(self, data):
-        username = data.get("username")
-        password = data.get("password")
-
-        # Use authenticate to check the user credentials
-        user = authenticate(username=username, password=password)
-
-        if user is None:
-            raise serializers.ValidationError("Invalid username or password")
-        return {"user": user}
+class LoginSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Optional: add custom claims here
+        return token
