@@ -9,14 +9,16 @@ import TokenExpiry from './components/TokenExpiry';
 import Tickets from './components/Tickets';
 import Dashboard from './components/Dashboard';
 import SubmitTicket from './components/SubmitTicket';
+import NavBar from "./components/navbar";
 
 
 const App = () => {
   return (
     <div>
-      <h1>Welcome to the App</h1>
+      <NavBar /> 
       <TokenExpiry />
       <Routes>
+      
         <Route path="/" element={<Home />} />
         <Route path="/accounts/register" element={<Register />} />
         <Route path="/accounts/login" element={<Login />} /> {/* Assuming Login route */}

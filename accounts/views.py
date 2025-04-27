@@ -32,7 +32,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
         if not access_token or not refresh_token:
             return Response({'detail': 'Login failed. No tokens returned.'}, status=400)
 
-        cookie_max_age = 3600  # 
+        cookie_max_age = 3600 # 
         response.set_cookie(
             key='access_token',
             value=access_token,
