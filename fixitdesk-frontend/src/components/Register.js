@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+const API_URL = "https://localhost:8000";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -19,10 +19,11 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const registerPath =  `${API_URL}/api/accounts/register/`
+    console.log("RegisterPath ", registerPath)
     try {
       console.log("Sending form data:", formData);
-      const response = await fetch(`${API_URL}/api/accounts/register/`, {
+      const response = await fetch(registerPath, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

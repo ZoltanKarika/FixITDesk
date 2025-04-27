@@ -11,7 +11,7 @@ const Tickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/tickets/', {
+        const response = await fetch('https://localhost:8000/api/tickets/', {
           credentials: 'include', // important if cookies/auth are needed
         });
 

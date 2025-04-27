@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'tickets',
     'accounts',
     'django_extensions',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # or 3001, depending on your frontend port
     "http://localhost:3001",
+    "https://localhost:3000",  # or 3001, depending on your frontend port
+    "https://localhost:3001",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -153,7 +156,8 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'x-requested-with',
 
 ]
-
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True  # True if using HTTPS
 SESSION_COOKIE_SAMESITE = 'None'
@@ -178,3 +182,4 @@ SIMPLE_JWT = {
     'ISSUER': None,
     'JWK_URL': None,
 }
+

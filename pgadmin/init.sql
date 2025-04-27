@@ -1,0 +1,1 @@
+CREATE EXTENSION IF NOT EXISTS system_stats;

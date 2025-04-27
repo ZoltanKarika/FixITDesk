@@ -43,11 +43,7 @@ const Login = () => {
 
       const data = await response.json();
       console.log("Login successful:", data);
-
-      // ✅ No need to manually set document.cookie here!
-      // Django already set access_token and refresh_token cookies for you.
-
-     // Clear any error
+      navigate('/dashboard');
 
     } catch (error) {
       console.error(error);

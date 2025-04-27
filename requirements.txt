@@ -7,3 +7,4 @@ dj-database-url
 django-cors-headers
 djangorestframework-simplejwt
 django-extensions
+django-sslserver

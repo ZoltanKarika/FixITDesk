@@ -1,63 +1,80 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode }  from 'jwt-decode';
-import Cookies from 'js-cookie'; // Import js-cookie
 
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
-  const [userRole, setUserRole] = useState(null); // To track if the user is staff
+  const [userInfo, setUserInfo] = useState(null); // Store user info like username, is_staff
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the access token exists in cookies
-    const accessToken = Cookies.get('access_token');
-    if (!accessToken) {
-      navigate('/login'); // Redirect to login if no token is found
-      return;
-    }
+    const checkUser = async () => {
+      try {
+        const response = await fetch('https://localhost:8000/api/accounts/whoami/', {
+          credentials: 'include', // important to send cookies
+        });
+
+        if (!response.ok) {
+          console.log('Not authenticated. Redirecting to login.');
+          navigate('/login');
+          return;
+        }
+
+        const data = await response.json();
+        console.log('User info:', data);
+        setUserInfo(data);
+        
+      } catch (error) {
+        console.error('Error checking user:', error);
+        navigate('/login'); // On error, force redirect
+      }
+    };
 
     const fetchTickets = async () => {
       try {
-        // Decode the token to check the user's role
-        const decodedToken = jwtDecode(accessToken); // Using the jwt-decode library
-        setUserRole(decodedToken.is_staff); // Assuming 'is_staff' is part of the decoded token
-
-        const response = await fetch('http://localhost:8000/api/tickets/', {
-          credentials: 'include', // Include credentials for cookies/authentication
+        const response = await fetch('https://localhost:8000/api/tickets/', {
+          credentials: 'include',
         });
-        
+
         if (!response.ok) {
           throw new Error('Failed to fetch tickets');
         }
+
         const data = await response.json();
         setTickets(data);
+
       } catch (error) {
         console.error('Error fetching tickets:', error);
       }
     };
 
-    fetchTickets();
-  }, [navigate]); // Add navigate to dependency list
+    checkUser().then(fetchTickets); // First check user, then fetch tickets
+
+  }, [navigate]);
 
   return (
     <div>
       <h1>Dashboard</h1>
-      {userRole !== null && (
+
+      {userInfo ? (
         <div>
-          <h2>{userRole ? 'Staff' : 'User'} Overview</h2>
-          <h3>Open Tickets</h3>
-          <ul>
-            {tickets.length === 0 ? (
-              <p>No tickets available</p>
-            ) : (
-              tickets.map(ticket => (
+          <h2>Welcome, {userInfo.username}!</h2>
+          <h3>Role: {userInfo.is_staff ? 'Staff' : 'User'}</h3>
+
+          <h3>Open Tickets:</h3>
+          {tickets.length === 0 ? (
+            <p>No tickets available.</p>
+          ) : (
+            <ul>
+              {tickets.map(ticket => (
                 <li key={ticket.id}>
                   {ticket.title} - {ticket.status}
                 </li>
-              ))
-            )}
-          </ul>
+              ))}
+            </ul>
+          )}
         </div>
+      ) : (
+        <p>Loading user information...</p>
       )}
     </div>
   );

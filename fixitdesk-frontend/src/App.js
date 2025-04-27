@@ -7,6 +7,9 @@ import Login from './components/Login'; // Add your Login component if necessary
 import Logout from './components/Logout';
 import TokenExpiry from './components/TokenExpiry';
 import Tickets from './components/Tickets';
+import Dashboard from './components/Dashboard';
+import SubmitTicket from './components/SubmitTicket';
+
 
 const App = () => {
   return (
@@ -19,6 +22,8 @@ const App = () => {
         <Route path="/accounts/login" element={<Login />} /> {/* Assuming Login route */}
         <Route path="/accounts/logout" element={<Logout />} /> {/* Add logout route */}
         <Route path="/tickets" element={<Tickets />} />
+        <Route path="/submitticket" element={<SubmitTicket />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );
