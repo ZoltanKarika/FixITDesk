@@ -9,7 +9,7 @@ class TicketListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        if user.is_staff:  # Staff can see all tickets
+        if user.is_support_staff:  # Staff can see all tickets
             return Ticket.objects.all()
         return Ticket.objects.filter(user=user)  # Normal user sees only their own tickets
 

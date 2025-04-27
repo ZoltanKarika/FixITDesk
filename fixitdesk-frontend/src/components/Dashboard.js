@@ -15,7 +15,7 @@ const Dashboard = () => {
 
         if (!response.ok) {
           console.log('Not authenticated. Redirecting to login.');
-          navigate('/login');
+          navigate('/accounts/login');
           return;
         }
 
@@ -25,7 +25,7 @@ const Dashboard = () => {
         
       } catch (error) {
         console.error('Error checking user:', error);
-        navigate('/login'); // On error, force redirect
+        navigate('/accounts/login'); // On error, force redirect
       }
     };
 
@@ -58,7 +58,7 @@ const Dashboard = () => {
       {userInfo ? (
         <div>
           <h2>Welcome, {userInfo.username}!</h2>
-          <h3>Role: {userInfo.is_staff ? 'Staff' : 'User'}</h3>
+          <h3>Role: {userInfo.is_support_staff ? 'Staff' : 'User'}</h3>
 
           <h3>Open Tickets:</h3>
           {tickets.length === 0 ? (

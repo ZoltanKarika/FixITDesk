@@ -76,4 +76,6 @@ class WhoAmIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({'username': request.user.username})
+        return Response({''
+        'username': request.user.username,
+        'is_support_staff' :request.user.is_support_staff})
