@@ -38,7 +38,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
             value=access_token,
             httponly=True,
             secure=True,  # Use True in production
-            samesite='Lax',
+            samesite='None',
             max_age=cookie_max_age,
         )
 
@@ -47,7 +47,7 @@ class CookieTokenObtainPairView(TokenObtainPairView):
             value=refresh_token,
             httponly=True,
             secure=True,
-            samesite='Lax',
+            samesite='None',
             max_age=cookie_max_age * 24,
         )
 
@@ -67,3 +67,13 @@ class LogoutView(APIView):
         response.delete_cookie('refresh_token')
 
         return response
+    
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+
+class WhoAmIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({'username': request.user.username})

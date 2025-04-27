@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'; // Removed React import from here
+import { Routes, Route, Navigate } from 'react-router-dom'; // Removed React import from here
 
 import Home from './components/Home';
 import Register from './components/Register';
@@ -15,9 +15,9 @@ const App = () => {
       <TokenExpiry />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} /> {/* Assuming Login route */}
-        <Route path="/logout" element={<Logout />} /> {/* Add logout route */}
+        <Route path="/accounts/register" element={<Register />} />
+        <Route path="/accounts/login" element={<Login />} /> {/* Assuming Login route */}
+        <Route path="/accounts/logout" element={<Logout />} /> {/* Add logout route */}
         <Route path="/tickets" element={<Tickets />} />
       </Routes>
     </div>

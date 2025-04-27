@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "./config"; // Make sure you have the API_URL set correctly
+import { API_URL } from "./config";
+import Cookies from "js-cookie"; // <-- You forgot to import it!
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,6 @@ const Login = () => {
 
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [token, setToken] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,17 +19,22 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const csrfToken = Cookies.get('csrftoken'); // ✅ Correctly get CSRF token
+
     try {
       console.log("Sending login request:", formData);
 
-      // Send login request to backend
       const response = await fetch(`${API_URL}/api/accounts/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,  // ✅ Pass the CSRF token!
         },
-        body: JSON.stringify({ username: formData.username, password: formData.password }),
-        credentials: "include", // <-- This is crucial for cookie-based auth
+        credentials: "include", // ✅ Important: send cookies too
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        }),
       });
 
       if (!response.ok) {
@@ -39,16 +44,14 @@ const Login = () => {
       const data = await response.json();
       console.log("Login successful:", data);
 
-      // Save the access token from the response
-      setToken(data.access); // You may choose to store it in cookies/localStorage
-      setError("");  // Clear any previous error
+      // ✅ No need to manually set document.cookie here!
+      // Django already set access_token and refresh_token cookies for you.
 
-      // You can redirect the user to the desired page after successful login
-      navigate("/tickets");  // Or wherever you'd like to redirect
+     // Clear any error
 
     } catch (error) {
+      console.error(error);
       setError("Error logging in");
-      setToken(""); // Clear any previous token if login fails
     }
   };
 
