@@ -58,19 +58,52 @@ const Dashboard = () => {
       {userInfo ? (
         <div>
           <h2>Welcome, {userInfo.username}!</h2>
-          <h3>Role: {userInfo.is_support_staff ? 'Staff' : 'User'}</h3>
-
+          {userInfo.is_support_staff && <button>Admin Mode</button>}
+          
+          
+          
           <h3>Open Tickets:</h3>
           {tickets.length === 0 ? (
             <p>No tickets available.</p>
           ) : (
-            <ul>
-              {tickets.map(ticket => (
-                <li key={ticket.id}>
-                  {ticket.title} - {ticket.status}
-                </li>
-              ))}
-            </ul>
+            <table>
+            <thead>
+                <tr>
+                    <td>
+                        ID
+                    </td>
+                    <td>
+                        Short Description
+                    </td>
+                    <td>
+                        State
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+            {tickets.map(ticket => (
+              <tr>
+                <td>
+                  {ticket.id}
+                </td>
+                <td>
+                  {ticket.title}
+                </td>
+                <td>
+                  {ticket.status}
+                </td>
+              </tr>
+               ))}
+            </tbody>
+                <tfoot>
+                    <tr>
+                      
+                    </tr>
+                </tfoot>  
+            </table>
+
+
+            
           )}
         </div>
       ) : (

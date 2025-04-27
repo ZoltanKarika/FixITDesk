@@ -67,5 +67,26 @@ class Ticket(models.Model):
     
     def __str__(self):
         return f"Ticket {self.id} - {self.title}"
+    
+class Note(models.Model):
+    # Types of notes: internal work notes or customer-visible notes
+    WORK_NOTE = 'work_note'
+    CUSTOMER_NOTE = 'customer_note'
+    
+    NOTE_TYPE_CHOICES = [
+        (WORK_NOTE, 'Work Note'),
+        (CUSTOMER_NOTE, 'Customer Note'),
+    ]
+    
+    ticket = models.ForeignKey(Ticket, related_name='notes', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notes', on_delete=models.CASCADE)
+    content = models.TextField()
+    note_type = models.CharField(
+        max_length=20,
+        choices=NOTE_TYPE_CHOICES, 
+        default=WORK_NOTE,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
-# Create your models here.
+    def __str__(self):
+        return f"{self.get_note_type_display()} on {self.ticket.title} by {self.user.username} at {self.created_at}"

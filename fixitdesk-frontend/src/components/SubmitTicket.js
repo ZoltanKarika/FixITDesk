@@ -21,7 +21,6 @@ const SubmitTicket = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Authorization will be automatically included with cookies because of the `credentials: 'include'` setting
         },
         credentials: 'include', // Important: Ensures cookies (including HttpOnly cookies) are sent with the request
         body: JSON.stringify({

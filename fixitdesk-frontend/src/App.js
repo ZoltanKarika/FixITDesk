@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom'; // Removed React import from here
 
 import Home from './components/Home';
@@ -10,6 +10,7 @@ import Tickets from './components/Tickets';
 import Dashboard from './components/Dashboard';
 import SubmitTicket from './components/SubmitTicket';
 import NavBar from "./components/navbar";
+import TicketPage from './components/TicketView';
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/tickets" element={<Tickets />} />
         <Route path="/submitticket" element={<SubmitTicket />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/tickets/:ticketId/" element={<TicketPage/>} />
       </Routes>
     </div>
   );
