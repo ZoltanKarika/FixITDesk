@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+
+
+
 function getCookie(name) {
   const cookieValue = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+  console.log("getCookie is hit: ", cookieValue )
   return cookieValue ? decodeURIComponent(cookieValue.split('=')[1]) : null;
 }
 
@@ -42,6 +46,10 @@ const TicketNotesAndDetailsPage = () => {
     };
     checkUser();
   }, [navigate]);
+
+  
+
+
 
   // Fetch ticket and notes
   useEffect(() => {

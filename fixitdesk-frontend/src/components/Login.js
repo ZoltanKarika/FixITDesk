@@ -20,7 +20,26 @@ const Login = () => {
     e.preventDefault();
 
     const csrfToken = Cookies.get('csrftoken'); // ✅ Correctly get CSRF token
+    try{
+      const response = await fetch(`${API_URL}/api/token/obtainpair/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,  // ✅ Pass the CSRF token!
+        },
+        credentials: "include", // ✅ Important: send cookies too
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        }),
+      });
+      const data = await response.json();
+      console.log("Login successful:", data);
 
+    }
+    catch{
+      console.error(error);
+    }
     try {
       console.log("Sending login request:", formData);
 

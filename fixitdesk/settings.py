@@ -135,9 +135,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # or 3001, depending on your frontend port
-    "http://localhost:3001",
     "https://localhost:3000",  # or 3001, depending on your frontend port
+    "https://localhost:3001",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://localhost:3000",
     "https://localhost:3001",
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -158,20 +160,24 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 ]
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+CSRF_COOKIE_NAME = "csrftoken"
+CSRF_COOKIE_SECURE = True 
 CSRF_COOKIE_SAMESITE = 'None'
-CSRF_COOKIE_SECURE = True  # True if using HTTPS
+CSRF_COOKIE_HTTPONLY = False
+CSRF_HEADER_NAME = 'HTTP_X_CSRFTOKEN'
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True  # True if using HTTPS
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'accounts.authentication.CookieJWTAuthentication',  # replace this line
+        'rest_framework.authentication.SessionAuthentication',  
+        #'accounts.authentication.CookieJWTAuthentication',# replace this line
     ),
 }
 
 from datetime import timedelta
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
