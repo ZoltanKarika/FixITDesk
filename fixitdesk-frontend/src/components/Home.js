@@ -1,36 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from './api'; 
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null); // To store the user data
-  const [loading, setLoading] = useState(true); // Optional loading state
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // ✅ Import and use navigate
 
   useEffect(() => {
-    // Fetch user info when Dashboard loads
-    fetch('https://localhost:8000/api/accounts/whoami/', {
-      method: 'GET',
-      credentials: 'include', // This makes sure browser sends HttpOnly cookies!
-    })
-      .then(response => {
+    const checkUser = async () => {
+      try {
+        const response = await api.get('/api/accounts/whoami/');
         if (!response.ok) {
-          throw new Error('Not authenticated');
+          navigate('/accounts/login');
+          return;
         }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Fetched user:', data);
-        setUser(data); // Save user data
-      })
-      .catch(error => {
-        console.error('Error fetching user info:', error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+        const data = await response.json();
+        setUser(data);
+      } catch (error) {
+        console.error('Error checking user:', error);
+        navigate('/accounts/login');
+      }
+    };
 
-  if (loading) {
-    return <div>Loading...</div>; // Show loading while fetching
-  }
+    checkUser(); // ✅ You forgot to call it!
+  }, [navigate]);
 
   return (
     <div>

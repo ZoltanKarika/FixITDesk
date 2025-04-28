@@ -1,56 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from "./config";
+import api from './api';
 
 const Dashboard = () => {
   const [tickets, setTickets] = useState([]);
   const [userInfo, setUserInfo] = useState(null); // Store user info like username, is_staff
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const response = await fetch('https://localhost:8000/api/accounts/whoami/', {
-          credentials: 'include', // important to send cookies
-        });
-
-        if (!response.ok) {
-          console.log('Not authenticated. Redirecting to login.');
+    useEffect(() => {
+      const checkUser = async () => {
+        try {
+          const response = await api.get('/api/accounts/whoami/');
+          if (!response.ok) {
+            navigate('/accounts/login');
+            return;
+          }
+          const data = await response.json();
+          setUserInfo(data);
+        } catch (error) {
+          console.error('Error checking user:', error);
           navigate('/accounts/login');
-          return;
         }
+      };
 
-        const data = await response.json();
-        console.log('User info:', data);
-        setUserInfo(data);
-        
-      } catch (error) {
-        console.error('Error checking user:', error);
-        navigate('/accounts/login'); // On error, force redirect
-      }
-    };
-
-    const fetchTickets = async () => {
-      try {
-        const response = await fetch('https://localhost:8000/api/tickets/', {
-          credentials: 'include',
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch tickets');
+      const fetchTickets = async () => {
+        try {
+          const response = await api.get('/api/tickets/');
+          if (!response.ok) throw new Error('Failed to fetch tickets');
+          const data = await response.json();
+          setTickets(data);
+        } catch (error) {
+          console.error('Error fetching tickets:', error);
         }
+      };
+    
+      checkUser().then(fetchTickets);
+    }, [navigate]);
 
-        const data = await response.json();
-        setTickets(data);
-
-      } catch (error) {
-        console.error('Error fetching tickets:', error);
-      }
-    };
-
-    checkUser().then(fetchTickets); // First check user, then fetch tickets
-
-  }, [navigate]);
-
+    
   return (
     <div>
       <h1>Dashboard</h1>

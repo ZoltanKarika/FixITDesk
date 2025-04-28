@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { API_URL } from "./config";
 
 
 
@@ -30,7 +31,7 @@ const TicketNotesAndDetailsPage = () => {
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const response = await fetch('https://localhost:8000/api/accounts/whoami/', {
+        const response = await fetch(`${ API_URL }/api/accounts/whoami/`, {
           credentials: 'include',
         });
         if (!response.ok) {
@@ -55,10 +56,10 @@ const TicketNotesAndDetailsPage = () => {
   useEffect(() => {
     const fetchTicketAndNotes = async () => {
       try {
-        const ticketRes = await fetch(`https://localhost:8000/api/tickets/${ticketId}/`, {
+        const ticketRes = await fetch(`${ API_URL }/api/tickets/${ticketId}/`, {
           credentials: 'include',
         });
-        const notesRes = await fetch(`https://localhost:8000/api/tickets/${ticketId}/notes/`, {
+        const notesRes = await fetch(`${ API_URL }/api/tickets/${ticketId}/notes/`, {
           credentials: 'include',
         });
 
@@ -83,7 +84,7 @@ const TicketNotesAndDetailsPage = () => {
   const handleTicketUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://localhost:8000/api/tickets/${ticketId}/`, {
+      const response = await fetch(`${ API_URL }/api/tickets/${ticketId}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ const TicketNotesAndDetailsPage = () => {
   // Notes CRUD
   const handleAddNote = async () => {
     try {
-      const response = await fetch(`https://localhost:8000/api/tickets/${ticketId}/notes/`, {
+      const response = await fetch(`${ API_URL }/api/tickets/${ticketId}/notes/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +136,7 @@ const TicketNotesAndDetailsPage = () => {
 
   const handleUpdateNote = async (noteId) => {
     try {
-      const response = await fetch(`https://localhost:8000/api/notes/${noteId}/`, {
+      const response = await fetch(`${ API_URL }/api/notes/${noteId}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +160,7 @@ const TicketNotesAndDetailsPage = () => {
     if (!window.confirm('Are you sure you want to delete this note?')) return;
 
     try {
-      const response = await fetch(`https://localhost:8000/api/notes/${noteId}/`, {
+      const response = await fetch(`${ API_URL }/api/notes/${noteId}/`, {
         method: 'DELETE',
         headers: {
           'X-CSRFToken': getCookie('csrftoken'),

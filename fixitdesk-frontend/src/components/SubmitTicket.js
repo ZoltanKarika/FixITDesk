@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from "./config";
 
 const SubmitTicket = () => {
   const [title, setTitle] = useState('');
@@ -17,7 +18,7 @@ const SubmitTicket = () => {
 
     try {
       // Make an API request to submit the ticket
-      const response = await fetch('https://localhost:8000/api/tickets/', {
+      const response = await fetch(`${ API_URL }/api/tickets/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

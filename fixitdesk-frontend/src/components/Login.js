@@ -1,69 +1,38 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "./config";
-import Cookies from "js-cookie"; // <-- You forgot to import it!
+import Cookies from "js-cookie";
+import api from './api';
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const csrfToken = Cookies.get('csrftoken'); // ✅ Correctly get CSRF token
-    try{
-      const response = await fetch(`${API_URL}/api/token/obtainpair/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken,  // ✅ Pass the CSRF token!
-        },
-        credentials: "include", // ✅ Important: send cookies too
-        body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
-        }),
-      });
-      const data = await response.json();
-      console.log("Login successful:", data);
-
-    }
-    catch{
-      console.error(error);
-    }
+    e.preventDefault(); // Prevent page reload
     try {
       console.log("Sending login request:", formData);
 
-      const response = await fetch(`${API_URL}/api/accounts/login/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrfToken,  // ✅ Pass the CSRF token!
-        },
-        credentials: "include", // ✅ Important: send cookies too
-        body: JSON.stringify({
+      const response = await api.post(
+        `/api/accounts/login/`,
+        {
           username: formData.username,
           password: formData.password,
-        }),
-      });
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
-      const data = await response.json();
-      console.log("Login successful:", data);
+      console.log("Login successful:", response.data);
       navigate('/dashboard');
-
     } catch (error) {
       console.error(error);
       setError("Error logging in");

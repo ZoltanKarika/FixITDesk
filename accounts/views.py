@@ -77,6 +77,59 @@ class CookieTokenObtainPairView(TokenObtainPairView):
         response.data = {'message': 'Login successful'}
         return response
 
+class CustomLoginView(TokenObtainPairView):
+    permission_classes = [AllowAny]
+    serializer_class = LoginSerializer  # Your JWT serializer
+
+    def post(self, request, *args, **kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+
+        # First authenticate the user
+        user = authenticate(username=username, password=password)
+        if user is None:
+            return Response({'message': 'Invalid credentials'}, status=400)
+
+        # Log the user in (Django session login)
+        login(request, user)
+
+        # Now generate tokens using the parent class
+        response = super().post(request, *args, **kwargs)
+        tokens = response.data
+
+        access_token = tokens.get('access')
+        refresh_token = tokens.get('refresh')
+
+        if not access_token or not refresh_token:
+            return Response({'detail': 'Login failed. No tokens returned.'}, status=400)
+
+        cookie_max_age = 3600  # 1 hour (adjust if you want)
+
+        # Set access_token cookie
+        response.set_cookie(
+            key='access_token',
+            value=access_token,
+            httponly=True,
+            secure=True,  # Should be True in production!
+            samesite='None',  # or 'Lax' depending on your frontend
+            max_age=cookie_max_age,
+        )
+
+        # Set refresh_token cookie
+        response.set_cookie(
+            key='refresh_token',
+            value=refresh_token,
+            httponly=True,
+            secure=True,
+            samesite='None',
+            max_age=cookie_max_age * 24,
+        )
+
+        response.data = {'message': 'Login successful'}
+        return response
+
+
+
 from rest_framework.permissions import IsAuthenticated 
 
 class LogoutView(APIView):
@@ -88,6 +141,8 @@ class LogoutView(APIView):
         # Clear the access and refresh tokens
         response.delete_cookie('access_token')
         response.delete_cookie('refresh_token')
+        response.delete_cookie('sessionid')
+        response.delete_cookie('csrftoken')
 
         return response
     

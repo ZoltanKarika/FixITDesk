@@ -1,6 +1,7 @@
 // src/components/Tickets.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from "./config";
 
 const Tickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -11,7 +12,7 @@ const Tickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await fetch('https://localhost:8000/api/tickets/', {
+        const response = await fetch(`${ API_URL }/api/tickets/`, {
           credentials: 'include', // important if cookies/auth are needed
         });
 
