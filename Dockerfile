@@ -22,8 +22,13 @@ RUN pip install -r requirements.txt
 # Copy the application files
 COPY . /app
 
+COPY entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
+
 # Expose the port for Gunicorn
 EXPOSE 8000
+
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Set the command to run the Django app with Gunicorn
 CMD ["gunicorn", "fixitdesk.wsgi:application", "--bind", "0.0.0.0:8000", "--certfile", "/app/ssl/localhost.crt", "--keyfile", "/app/ssl/localhost.key"]

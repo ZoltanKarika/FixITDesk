@@ -80,6 +80,11 @@ const Dashboard = () => {
                 <td>
                   {ticket.status}
                 </td>
+                <td>
+                <a href={'/tickets/' + ticket.id}>
+                      <button>View</button>
+                </a>
+              </td>
               </tr>
                ))}
             </tbody>

@@ -35,7 +35,7 @@ class LoginView(APIView):
         password = request.data.get("password")
         user = authenticate(username=username, password=password)
         if user:
-            login(request, user)  # Log the user in by creating a session
+            #login(request, user)  # Log the user in by creating a session
             return Response({"message": "Login successful"}, status=200)
         return Response({"message": "Invalid credentials"}, status=400)
 
@@ -91,7 +91,7 @@ class CustomLoginView(TokenObtainPairView):
             return Response({'message': 'Invalid credentials'}, status=400)
 
         # Log the user in (Django session login)
-        login(request, user)
+        #login(request, user)
 
         # Now generate tokens using the parent class
         response = super().post(request, *args, **kwargs)
@@ -110,8 +110,8 @@ class CustomLoginView(TokenObtainPairView):
             key='access_token',
             value=access_token,
             httponly=True,
-            secure=True,  # Should be True in production!
-            samesite='None',  # or 'Lax' depending on your frontend
+            secure=False,  # Should be True in production!
+            samesite='Lax',  # or 'Lax' depending on your frontend
             max_age=cookie_max_age,
         )
 
