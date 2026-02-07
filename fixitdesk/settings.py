@@ -48,8 +48,10 @@ INSTALLED_APPS = [
     'tickets',
     'accounts',
     'django_extensions',
-    'sslserver',
 ]
+
+
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # MUST BE FIRST
@@ -87,10 +89,13 @@ WSGI_APPLICATION = 'fixitdesk.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-    default='postgres://postgres:postgres@localhost:5432/fixitdesk'
-    )
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
+
+
 
 
 # Password validation
@@ -135,12 +140,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "https://localhost:3000",  # or 3001, depending on your frontend port
-    "https://localhost:3001",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://localhost:3001",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://localhost:3000",
-    "https://localhost:3001",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://localhost:3001",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -158,8 +165,8 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'x-requested-with',
 
 ]
-SECURE_SSL_REDIRECT = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = False
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_NAME = "csrftoken"
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_SAMESITE = 'Lax'

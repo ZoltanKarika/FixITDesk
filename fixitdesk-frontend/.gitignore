@@ -21,3 +21,49 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# ======================
+# Python / Django
+# ======================
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+.env.*
+*.log
+
+# Django static / media (local only)
+staticfiles/
+media/
+
+# ======================
+# Node / React
+# ======================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# React build output
+build/
+dist/
+
+# React cache
+node_modules/.cache/
+
+# ======================
+# OS / Editor
+# ======================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# ======================
+# Docker leftovers (optional)
+# ======================
+*.pid
+
