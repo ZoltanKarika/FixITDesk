@@ -13,7 +13,7 @@ const TokenExpiry = () => {
       console.log("Current URL:", currentUrl);
 
       // Skip token expiry check for exact /accounts/login or /accounts/register routes
-      if (currentUrl === '/accounts/login' || currentUrl === '/accounts/register') {
+      if (currentUrl === '/gatekeeper') {
         console.log("Skipping token expiry check for:", currentUrl);
         return;
       }
@@ -27,11 +27,11 @@ const TokenExpiry = () => {
 
         if (response.status === 401) {
           console.log("Session expired, redirecting to login...");
-          navigate('/accounts/login');
+          navigate('/gatekeeper');
         }
       } catch (error) {
         console.error('Auth check failed', error);
-        navigate('/accounts/login');
+        navigate('/gatekeeper');
       }
     };
 

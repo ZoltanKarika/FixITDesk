@@ -40,7 +40,7 @@ const SubmitTicket = () => {
         // Handle different responses from the backend
         if (response.status === 401) {
           setError('You must be logged in to submit a ticket.');
-          navigate('/login');
+          navigate('/gatekeeper');
           return;
         }
         throw new Error('Failed to submit the ticket');

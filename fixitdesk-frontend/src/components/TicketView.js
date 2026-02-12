@@ -35,14 +35,14 @@ const TicketNotesAndDetailsPage = () => {
           credentials: 'include',
         });
         if (!response.ok) {
-          navigate('/accounts/login');
+          navigate('/gatekeeper');
           return;
         }
         const data = await response.json();
         setUserInfo(data);
       } catch (error) {
         console.error('Error checking user:', error);
-        navigate('/accounts/login');
+        navigate('/gatekeeper');
       }
     };
     checkUser();
@@ -180,7 +180,7 @@ const TicketNotesAndDetailsPage = () => {
 
   return (
     <div>
-      <h2>Ticket #{ticketId}</h2>
+      <h1>Ticket #{ticketId}</h1>
 
       {/* Ticket Details */}
       {!ticketEditing ? (

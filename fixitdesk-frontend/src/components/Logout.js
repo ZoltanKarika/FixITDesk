@@ -11,11 +11,11 @@ const Logout = () => {
       try {
         const response = await api.post('/api/accounts/logout/');
         console.log(response.data.message); // "Logged out successfully!"
-        navigate('/accounts/login')
+        navigate('/gatekeeper')
         return true;
       } catch (error) {
         console.error("Logout failed:", error);
-        navigate('/accounts/login')
+        navigate('/gatekeeper')
         return false;
       }
     };

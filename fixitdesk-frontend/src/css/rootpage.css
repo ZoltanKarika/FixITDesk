@@ -1,0 +1,231 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* kis normalize, hogy a h1/p ne tolja szét */
+h1 {
+  margin: 0 0 12px 0;
+  line-height: 1.1;
+  letter-spacing: 2px;
+}
+
+p {
+  margin: 0 0 16px 0;
+}
+
+/* --------- LAYOUT --------- */
+.container {
+  position: relative;
+  width: 900px;
+  max-width: 95vw;
+  min-height: 520px;
+  margin: 40px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #ece9e9;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 1);
+}
+
+
+/* --------- FORMS (BAL/JOBB) --------- */
+.form-cont {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1.2s ease-in-out, opacity 1s ease-in-out;
+}
+
+.form-cont form {
+  width: 75%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  /* hogy ne legyen “félrecsúszva” */
+  align-items: center;
+  text-align: center;
+}
+
+.form-cont input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  outline: none;
+
+
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  padding: 1em;
+  background-color: #ccc;
+  box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+  transition: 300ms ease-in-out;
+}
+
+.form-cont input:focus {
+  background-color: white;
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696,
+    -13px -13px 100px #ffffff;
+}
+
+.form-cont button {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid black;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(rgb(138, 160, 204), rgb(55, 88, 180), rgb(35, 35, 122), rgb(114, 114, 186));
+  font-size: medium;
+  font-weight: bolder;
+  color: #ece9e9;
+  transition: 1s;
+}
+
+/* alaphelyzet */
+.log-in-cont {
+  left: 0;
+  z-index: 2;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.reg-cont {
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------- OVERLAY --------- */
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 1.2s ease-in-out;
+  z-index: 100;
+}
+
+.overlay {
+  position: relative;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  transition: transform 1.2s ease-in-out;
+  background: linear-gradient(135deg,
+      rgb(18, 3, 182),
+      rgb(83, 83, 198),
+      rgb(54, 59, 204),
+      rgb(0, 0, 0),
+      rgb(54, 59, 204),
+      rgb(83, 83, 198),
+      rgb(18, 3, 182));
+  color: #ffffff;
+}
+
+.overlay-panel {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  padding: 0 48px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.overlay-left {
+  left: 0;
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+/* gomb (átlátszó) az overlayen */
+.slide-but {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* --------- AKTÍV ÁLLAPOT (SIGN UP) --------- */
+.container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  pointer-events: all;
+}
+
+/* --------- AKTÍV ÁLLAPOT (SIGN UP) --------- */
+.container.right-panel-active .log-in-cont {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.container.right-panel-active .reg-cont {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  pointer-events: all;
+}
+
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+/* --------- HOVER --------- */
+button:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  transition: 1s;
+}
+
+
+.root-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  min-height: 100vh;
+  background-image: url('../img/ChatGPT_generated-background.png');
+  background-size: cover;
+}
+
+
+.logo {
+  background-image: url('../img/ChatGPT_generated_logo.png');
+}

@@ -11,14 +11,14 @@ const Dashboard = () => {
       try {
         const response = await api.get('/api/accounts/whoami/');
         if (!response.ok) {
-          navigate('/accounts/login');
+          navigate('/gatekeeper');
           return;
         }
         const data = await response.json();
         setUser(data);
       } catch (error) {
         console.error('Error checking user:', error);
-        navigate('/accounts/login');
+        navigate('/gatekeeper');
       }
     };
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Welcome {user ? user.username : 'Guest'}!</h2>
+      <h1>Welcome {user ? user.username : 'Guest'}!</h1>
       <p>This is your dashboard.</p>
     </div>
   );

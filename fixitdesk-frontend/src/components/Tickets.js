@@ -19,7 +19,7 @@ const Tickets = () => {
         // Handle Unauthorized (401) response
         if (response.status === 401) {
           console.log('Unauthorized. Redirecting to login...');
-          navigate('/login'); // Redirect to login if unauthorized
+          navigate('/gatekeeper'); // Redirect to login if unauthorized
           return;
         }
 

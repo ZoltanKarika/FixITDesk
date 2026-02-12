@@ -1,34 +1,39 @@
-import React, { Component } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom'; // Removed React import from here
+
+import { Routes, Route} from 'react-router-dom'; // Removed React import from here
 
 import Home from './components/Home';
-import Register from './components/Register';
-import Login from './components/Login'; // Add your Login component if necessary
 import Logout from './components/Logout';
 import TokenExpiry from './components/TokenExpiry';
 import Tickets from './components/Tickets';
 import Dashboard from './components/Dashboard';
 import SubmitTicket from './components/SubmitTicket';
-import NavBar from "./components/navbar";
 import TicketPage from './components/TicketView';
+import InnerLayout from './components/InnerLayout';
+import Rootpage from './components/Rootpage';
+import Fixer from './components/Fixer';
+
+
 
 
 const App = () => {
   return (
-    <div>
-      <NavBar /> 
+    <div className='whole-app'>
+
       <TokenExpiry />
       <Routes>
-      
-        <Route path="/" element={<Home />} />
-        <Route path="/accounts/register" element={<Register />} />
-        <Route path="/accounts/login" element={<Login />} /> {/* Assuming Login route */}
-        <Route path="/accounts/logout" element={<Logout />} /> {/* Add logout route */}
-        <Route path="/tickets" element={<Tickets />} />
-        <Route path="/submitticket" element={<SubmitTicket />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/tickets/:ticketId/" element={<TicketPage/>} />
+        <Route path="/gatekeeper" element={<Rootpage />} />
+        <Route element={<InnerLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/accounts/logout" element={<Logout />} /> {/* Add logout route */}
+          <Route path="/fixer" element={<Fixer/>}/>
+          <Route path="/tickets" element={<Tickets />} />
+          <Route path="/submitticket" element={<SubmitTicket />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tickets/:ticketId/" element={<TicketPage />} />
+        </Route>
+
       </Routes>
+
     </div>
   );
 };

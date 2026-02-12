@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from "./config";
+
 import api from './api';
 
 const Dashboard = () => {
@@ -13,14 +13,14 @@ const Dashboard = () => {
         try {
           const response = await api.get('/api/accounts/whoami/');
           if (!response.ok) {
-            navigate('/accounts/login');
+            navigate('/gatekeeper');
             return;
           }
           const data = await response.json();
           setUserInfo(data);
         } catch (error) {
           console.error('Error checking user:', error);
-          navigate('/accounts/login');
+          navigate('/gatekeeper');
         }
       };
 
@@ -45,10 +45,8 @@ const Dashboard = () => {
 
       {userInfo ? (
         <div>
-          <h2>Welcome, {userInfo.username}!</h2>
+          <h1>Welcome, {userInfo.username}!</h1>
           {userInfo.is_support_staff && <button>Admin Mode</button>}
-          
-          
           
           <h3>Open Tickets:</h3>
           {tickets.length === 0 ? (
