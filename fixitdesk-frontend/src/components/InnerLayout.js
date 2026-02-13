@@ -8,7 +8,6 @@ export default function InnerLayout() {
     <div className="wrapper">
       <NavBar />
       <div>
-
         <Outlet className="main-content" />
       </div>
       <div className="box">

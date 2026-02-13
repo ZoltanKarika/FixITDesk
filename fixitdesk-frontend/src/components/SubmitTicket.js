@@ -57,7 +57,7 @@ const SubmitTicket = () => {
   };
 
   return (
-    <div>
+    <div className='main-c'>
       <h1>Submit a Ticket</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>

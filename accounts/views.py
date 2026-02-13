@@ -157,3 +157,18 @@ class WhoAmIView(APIView):
         return Response({''
         'username': request.user.username,
         'is_support_staff' :request.user.is_support_staff})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

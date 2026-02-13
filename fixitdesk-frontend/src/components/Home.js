@@ -28,7 +28,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Welcome {user ? user.username : 'Guest'}!</h1>
-      <p>This is your dashboard.</p>
+      <div>This is your dashboard.</div>
     </div>
   );
 };
