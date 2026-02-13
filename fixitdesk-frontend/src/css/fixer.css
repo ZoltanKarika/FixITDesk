@@ -1,78 +1,84 @@
  .fixer-frame {
-  max-width: 600px;
-  margin: 50px auto;
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
+   max-width: 600px;
+   margin: 50px auto;
+   font-family: Arial, sans-serif;
+   padding: 20px;
+ }
 
-h1 {
-  text-align: center;
-  color: #333;
-}
+ .fixer-frame h1 {
+   text-align: center;
+   color: #333;
+ }
 
-.chat-box {
-  border: 1px solid #ccc;
-  height: 400px;
-  overflow-y: auto;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: #f9f9f9;
-  border-radius: 8px;
-}
+ .chat-box {
+   border: 1px solid #ccc;
+   height: 400px;
+   overflow-y: auto;
+   padding: 15px;
+   margin-bottom: 15px;
+   background: #f9f9f9;
+   border-radius: 8px;
+   position: relative;
+   z-index: 10;
+   box-shadow: 7px 7px 20px rgb(127, 192, 210);
 
-.message {
-  margin: 10px 0;
-  padding: 10px 15px;
-  border-radius: 8px;
-  max-width: 80%;
-  word-wrap: break-word;
-}
 
-.message.user {
-  background: #007bff;
-  color: white;
-  margin-left: auto;
-  text-align: right;
-}
+ }
 
-.message.ai {
-  background: #e9ecef;
-  color: #333;
-  margin-right: auto;
-}
+ .message {
+   margin: 10px 0;
+   padding: 10px 15px;
+   border-radius: 8px;
+   max-width: 80%;
+   word-wrap: break-word;
+ }
 
-.input-area {
-  display: flex;
-  gap: 10px;
-}
+ .message.user {
+   background: #007bff;
+   color: white;
+   margin-left: auto;
+   text-align: right;
+ }
 
-input {
-  flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
+ .message.ai {
+   background: #e9ecef;
+   color: #333;
+   margin-right: auto;
+ }
 
-input:disabled {
-  background: #f0f0f0;
-}
+ .fixer-frame .input-area {
+   display: flex;
+   gap: 10px;
+ }
 
-button {
-  padding: 12px 24px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
+ .fixer-frame input {
+   flex: 1;
+   padding: 12px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 16px;
+   outline: none;
+ }
 
-button:hover:not(:disabled) {
-  background: #0056b3;
-}
+ .fixer-frame input:disabled {
+   background: #f0f0f0;
+ }
 
-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
+ .fixer-frame button {
+   padding: 12px 24px;
+   background: #007bff;
+   color: white;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+ }
+
+ .fixer-frame button:hover:not(:disabled) {
+   background: #0056b3;
+ }
+
+ .fixer-frame button:disabled {
+   background: #ccc;
+   cursor: not-allowed;
+ }

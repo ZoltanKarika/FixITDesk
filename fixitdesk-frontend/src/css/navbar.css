@@ -7,14 +7,9 @@
 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font: size 19px;
-  z-index: 1;
+  z-index: 5;
 }
 
-/*background-image:url();
-background-size:cover;
-background-repeat: no-repeat;
-background-position: center;
-*/
 
 nav {
   background-color: rgb(167, 182, 248);
@@ -42,10 +37,13 @@ nav a {
   display: flex;
   align-items: center;
   color: black;
+  transition: 0.6s;
 }
 
 nav a:hover {
   background-color: rgb(29, 188, 191);
+  transform: scale(1.1);
+  transition: 0.6s;
 }
 
 nav li:first-child {
