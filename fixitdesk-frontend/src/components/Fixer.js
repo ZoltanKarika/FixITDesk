@@ -49,7 +49,7 @@ export const Fixer = () => {
     } catch (error) {
       console.error("Chat hiba:", error);
       const errorMessage = {
-        text: '❌ Hiba: ' + error.message,
+        text: error.message,
         sender: 'ai'
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -70,7 +70,8 @@ export const Fixer = () => {
 
       <div className="chat-box" ref={chatBoxRef}>
         {messages.length === 0 && (
-          <div className="message ai">Szia! Én Mr.Fixer vagyok. Miben segíthetek?</div>
+          <div className="message ai">Greetings!
+            <p>I'm Mr.Fixer your AI helper, perhaps I can help you before you open a ticket.So what can I do for you today?</p></div>
         )}
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender}`}>
@@ -79,7 +80,7 @@ export const Fixer = () => {
         ))}
         {isLoading && (
           <div className="message ai typing-indicator">
-            <span>Gépelés...</span>
+            <span>Mr.Fixer writing...</span>
           </div>
         )}
       </div>
@@ -93,11 +94,11 @@ export const Fixer = () => {
           placeholder="Írj valamit..."
           disabled={isLoading}
         />
-        <button 
-          onClick={sendMessage} 
+        <button
+          onClick={sendMessage}
           disabled={isLoading || !input.trim()}
         >
-          {isLoading ? '...' : 'Küldés'}
+          {isLoading ? '...' : 'Sending'}
         </button>
       </div>
     </div>

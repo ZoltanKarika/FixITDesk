@@ -1,9 +1,9 @@
 function AppLayout() {
   return (
     <>
-      <Navbar /> {/* BUMM, itt a Navbarod! Ez csak a belső oldalakon fog létezni. */}
+      <Navbar /> 
       <main>
-        <Outlet /> {/* Itt jelenik meg a Dashboard, Profil, stb. */}
+        <Outlet /> 
       </main>
     </>
   );
