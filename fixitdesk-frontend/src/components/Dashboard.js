@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './Dashboard.css'
+import '../css/animations.css'
 import api from './api';
 
 const Dashboard = () => {
@@ -40,7 +41,7 @@ const Dashboard = () => {
 
     
   return (
-    <div>
+    <div className='fade-in slide-in'>
       <h1 className='page-title'>Dashboard</h1>
 
       {userInfo ? (

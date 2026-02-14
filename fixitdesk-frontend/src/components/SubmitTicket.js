@@ -18,7 +18,7 @@ const SubmitTicket = () => {
 
     try {
       // Make an API request to submit the ticket
-      const response = await fetch(`${ API_URL }/api/tickets/`, {
+      const response = await fetch(`${API_URL}/api/tickets/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const SubmitTicket = () => {
   };
 
   return (
-    <div className='main-c'>
+    <div className='main-c fade-in slide-in'>
       <h1>Submit a Ticket</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -72,11 +72,12 @@ const SubmitTicket = () => {
           />
         </div>
         <div>
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+          <label htmlFor="department">Department:</label>
+          <input
+            type="text"
+            id="department"
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
             required
           />
         </div>
@@ -132,12 +133,11 @@ const SubmitTicket = () => {
           </select>
         </div>
         <div>
-          <label htmlFor="department">Department:</label>
-          <input
-            type="text"
-            id="department"
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </div>

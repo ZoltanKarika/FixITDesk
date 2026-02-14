@@ -83,7 +83,7 @@ const Rootpage = () => {
 
   return (
     <>
-      <div className="root-wrap">
+      <div className="root-wrap fade-in">
         <div className="logo"></div>
         <div className={`container ${rightActive ? "right-panel-active" : ""}`}>
           <div className="form-cont log-in-cont">

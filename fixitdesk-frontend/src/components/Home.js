@@ -26,7 +26,7 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div>
+    <div className='fade-in'>
       <h1>Welcome {user ? user.username : 'Guest'}!</h1>
       <div>This is your dashboard.</div>
     </div>

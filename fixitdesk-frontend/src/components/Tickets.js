@@ -45,7 +45,7 @@ const Tickets = () => {
   }
 
   return (
-    <div>
+    <div className='fade-in slide-in'>
       <h1>Tickets</h1>
       {error && <div style={{ color: 'red' }}>{error}</div>} {/* Show error message if any */}
       <ul>

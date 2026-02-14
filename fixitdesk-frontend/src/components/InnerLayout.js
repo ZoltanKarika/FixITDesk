@@ -5,7 +5,7 @@ import '../css/animback.css';
 
 export default function InnerLayout() {
   return (
-    <div className="wrapper">
+    <div className="wrapper fade-in">
       <NavBar />
       <div>
         <Outlet/>

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import "../css/fixer.css";
+import '../css/animations.css';
 
 export const Fixer = () => {
   const [messages, setMessages] = useState([]);
@@ -65,7 +66,7 @@ export const Fixer = () => {
   };
 
   return (
-    <div className="fixer-frame">
+    <div className="fixer-frame fade-in slide-in">
       <h1>🤖 Mr.Fixer</h1>
 
       <div className="chat-box" ref={chatBoxRef}>
