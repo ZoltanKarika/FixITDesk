@@ -8,7 +8,7 @@ export default function InnerLayout() {
     <div className="wrapper fade-in">
       <NavBar />
       <div>
-        <Outlet/>
+        <Outlet className="top-50"/>
       </div>
       <div className="box">
         <div></div>

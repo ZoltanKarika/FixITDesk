@@ -1,0 +1,101 @@
+.dashboard-page{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  color: rgba(255,255,255,.92);
+}
+
+.dashboard-page .page-title{
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+}
+
+.dashboard-page .dashboard-panel{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+  margin-bottom: 22px;
+}
+
+.dashboard-page .admin-btn{
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(90deg, rgba(99,102,241,.95), rgba(56,189,248,.85));
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+
+.dashboard-page .admin-btn:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+
+.dashboard-page .table-panel{
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+}
+
+
+.dashboard-page table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.dashboard-page thead{
+  background: rgba(255,255,255,.08);
+}
+
+.dashboard-page thead td{
+  padding: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,.85);
+}
+
+/* Rows */
+.dashboard-page tbody tr{
+  transition: background-color .12s ease;
+}
+
+.dashboard-page tbody tr:hover{
+  background: rgba(255,255,255,.05);
+}
+
+.dashboard-page tbody td{
+  padding: 12px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+
+.dashboard-page .view-btn{
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.9);
+  cursor: pointer;
+  transition: transform .12s ease, transform .12s ease;
+}
+
+.dashboard-page .view-btn:hover{
+  background: rgba(255,255,255,.15);
+  transform: translateY(-1px);
+}
+
+/* Loading text */
+.dashboard-page .loading{
+  opacity: .7;
+}

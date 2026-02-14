@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from './api';
 import { API_URL } from "./config";
 import '../css/rootpage.css';
+import '../css/animations.css'
 
 const Rootpage = () => {
   const [rightActive, setRightActive] = useState(false);// for Design

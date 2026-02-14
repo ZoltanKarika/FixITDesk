@@ -23,12 +23,12 @@ code {
   flex-direction: column;
 }
 
-.main-c h1{
-padding: 25px;
+.main-c h1 {
+  padding: 25px;
 }
 
 
-.main-c input{
+.main-c input {
   background-color: #eee;
   border: none;
   padding: 1rem;
@@ -44,22 +44,26 @@ padding: 25px;
   outline-color: rgb(25, 17, 177);
 }
 
-.main-c form{
-font-size: 20px;
-letter-spacing: 3px;
-font-family:fantasy;
+.main-c form {
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-family: fantasy;
 }
 
 .main-c button {
-   padding: 12px 24px;
-   background: #007bff;
-   color: white;
-   border: none;
-   border-radius: 5px;
-   cursor: pointer;
-   font-size: 16px;
- }
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-.main-c div{
-padding:10px;
+.main-c div {
+  padding: 10px;
+}
+
+.p-top{
+padding-top: 60px;
 }

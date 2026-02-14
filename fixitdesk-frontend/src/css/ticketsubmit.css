@@ -1,0 +1,116 @@
+.ticket-page{
+  min-height: calc(100vh - 50px); /* nav magasságod kb 50px */
+  display: grid;
+  place-items: center;
+  padding: 20px 10px;
+}
+
+.ticket-page .ticket-panel{
+  width: min(620px, 100%);
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 14px 50px rgba(0,0,0,.35);
+  backdrop-filter: blur(10px);
+}
+
+.ticket-page .ticket-panel h1{
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,.92);
+}
+
+.ticket-page .ticket-panel form{
+  display: grid;
+  gap: 1px;
+}
+
+.ticket-page .ticket-panel form > div{
+  display: grid;
+  gap: 5px;
+}
+
+.ticket-page .ticket-panel label{
+  font-size: 12px;
+  color: rgba(255,255,255,.72);
+}
+
+.ticket-page .ticket-panel input,
+.ticket-page .ticket-panel select,
+.ticket-page .ticket-panel textarea{
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.22);
+  color: rgba(255,255,255,.92);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease, background-color .15s ease;
+}
+
+
+.ticket-page .ticket-panel input:focus,
+.ticket-page .ticket-panel select:focus,
+.ticket-page .ticket-panel textarea:focus{
+  border-color: rgba(99,102,241,.55);
+  box-shadow: 0 0 0 4px rgba(99,102,241,.25);
+  transform: translateY(-1px);
+}
+.ticket-page .ticket-panel textarea{
+  min-height: 130px;
+  resize: vertical;
+}
+
+
+.ticket-page .ticket-panel select{
+  appearance: none;
+  padding-right: 20px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255,255,255,.7) 50%),
+    linear-gradient(135deg, rgba(255,255,255,.7) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 52%,
+    calc(100% - 12px) 52%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+
+.ticket-page .ticket-panel button[type="submit"]{
+  margin-top: 4px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(90deg, rgba(99,102,241,.95), rgba(56,189,248,.85));
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+
+.ticket-page .ticket-panel button[type="submit"]:hover{
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.ticket-page .ticket-panel button[type="submit"]:active{
+  transform: translateY(0) scale(.99);
+}
+
+
+.ticket-page .ticket-panel .ticket-error{
+  color: #ff7b7b;
+  margin: 10px 0 14px;
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .ticket-page .ticket-panel.enter{
+    animation: enter .4s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes enter{
+    from{ opacity:0; transform: translateY(160px) scale(.98); filter: blur(6px); }
+    to  { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+}

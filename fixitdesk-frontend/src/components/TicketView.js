@@ -179,7 +179,7 @@ const TicketNotesAndDetailsPage = () => {
   if (!ticket || !userInfo) return <div>Loading...</div>;
 
   return (
-    <div className='fade-in'>
+    <div className='fade-in p-top'>
       <h1>Ticket #{ticketId}</h1>
 
       {/* Ticket Details */}

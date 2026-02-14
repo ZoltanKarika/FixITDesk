@@ -66,7 +66,7 @@ export const Fixer = () => {
   };
 
   return (
-    <div className="fixer-frame fade-in slide-in">
+    <div className="fixer-frame enter">
       <h1>🤖 Mr.Fixer</h1>
 
       <div className="chat-box" ref={chatBoxRef}>
