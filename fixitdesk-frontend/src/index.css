@@ -64,6 +64,7 @@ code {
   padding: 10px;
 }
 
-.p-top{
-padding-top: 60px;
+.content-layer{
+  position: relative;
+  z-index: 5;
 }

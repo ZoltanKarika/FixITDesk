@@ -45,8 +45,9 @@ const Tickets = () => {
   }
 
   return (
-    <div className='fade-in enter p-top'>
-      <h1>Tickets</h1>
+<div className='p-top enter'>
+    <div className='ticket-details-page'>
+      <h1 >Tickets</h1>
       {error && <div style={{ color: 'red' }}>{error}</div>} {/* Show error message if any */}
       <ul>
         {tickets.map(ticket => (
@@ -54,6 +55,7 @@ const Tickets = () => {
         ))}
       </ul>
     </div>
+</div>
   );
 };
 

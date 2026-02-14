@@ -2,12 +2,12 @@
   min-height: calc(100vh - 50px); /* nav magasságod kb 50px */
   display: grid;
   place-items: center;
-  padding: 20px 10px;
+  padding: 10px 5px;
 }
 
 .ticket-page .ticket-panel{
-  width: min(620px, 100%);
-  padding: 12px;
+  width: min(520px, 100%);
+  padding: 6px;
   border-radius: 16px;
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.12);
@@ -16,14 +16,14 @@
 }
 
 .ticket-page .ticket-panel h1{
-  margin: 0 0 16px;
-  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  letter-spacing: -0.05em;
   color: rgba(255,255,255,.92);
 }
 
 .ticket-page .ticket-panel form{
   display: grid;
-  gap: 1px;
+  gap: 5px;
 }
 
 .ticket-page .ticket-panel form > div{
@@ -32,15 +32,15 @@
 }
 
 .ticket-page .ticket-panel label{
-  font-size: 12px;
+  font-size: 15px;
   color: rgba(255,255,255,.72);
 }
 
 .ticket-page .ticket-panel input,
 .ticket-page .ticket-panel select,
 .ticket-page .ticket-panel textarea{
-  width: 100%;
-  padding: 11px 12px;
+  width: 250px;
+  padding: 8px 8px;
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,.14);
   background: rgba(0,0,0,.22);
@@ -113,4 +113,8 @@
     from{ opacity:0; transform: translateY(160px) scale(.98); filter: blur(6px); }
     to  { opacity:1; transform: translateY(0) scale(1); filter: blur(0); }
   }
+}
+
+.p-top{
+padding-top: 60px;
 }

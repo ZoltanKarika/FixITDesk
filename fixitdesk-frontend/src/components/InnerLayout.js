@@ -5,10 +5,10 @@ import '../css/animback.css';
 
 export default function InnerLayout() {
   return (
-    <div className="wrapper fade-in">
-      <NavBar />
-      <div>
-        <Outlet className="top-50"/>
+    <div className="wrapper">
+      <div className="content-layer">
+        <NavBar />
+        <Outlet />
       </div>
       <div className="box">
         <div></div>

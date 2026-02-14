@@ -22,7 +22,7 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="hideOnMobile">
-            <Link to="/fixer">Mr.Fixxer</Link>
+            <Link to="/fixer">Mr.Fixer</Link>
           </li>
           <li className="hideOnMobile">
             <Link to="/tickets">Tickets</Link>
@@ -49,7 +49,7 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/fixer">Mr.Fixxa</Link>
+            <Link to="/fixer">Mr.Fixer</Link>
           </li>
           <li>
             <Link to="/tickets">Tickets</Link>

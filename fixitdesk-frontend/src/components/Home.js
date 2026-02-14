@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from './api'; 
+import api from './api';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -26,9 +26,11 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div className='enter p-top'>
-      <h1>Welcome {user ? user.username : 'Guest'}!</h1>
-      <div>This is your dashboard.</div>
+    <div className='p-top enter'>
+      <div className='ticket-details-page'>
+        <h1>Welcome {user ? user.username : 'Guest'}!</h1>
+        <div>This is your dashboard.</div>
+      </div>
     </div>
   );
 };

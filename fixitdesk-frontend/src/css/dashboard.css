@@ -99,3 +99,26 @@
 .dashboard-page .loading{
   opacity: .7;
 }
+
+.dashboard-page button{
+  margin-top: 4px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(90deg, rgba(99,102,241,.95), rgba(56,189,248,.85));
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+
+.dashboard-page button:hover{
+  filter: brightness(1.06);
+  transform: translateY(-3px);
+  transform: scale(1.05);
+}
+
+.dashboard-page button:active{
+  transform: translateY(0) scale(.99);
+}
