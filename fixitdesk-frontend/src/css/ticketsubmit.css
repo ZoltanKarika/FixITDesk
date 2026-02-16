@@ -1,5 +1,5 @@
 .ticket-page{
-  min-height: calc(100vh - 50px); /* nav magasságod kb 50px */
+  min-height: calc(100vh - 50px); 
   display: grid;
   place-items: center;
   padding: 10px 5px;

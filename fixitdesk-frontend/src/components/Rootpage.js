@@ -42,7 +42,7 @@ const Rootpage = () => {
           withCredentials: true,
         }
       );
-      console.log("Login successful:", response.data);
+      console.log("Login successful:", response.data); // undefined lesz?
       navigate('/dashboard');
     } catch (loginError) {
       console.error(loginError);
@@ -68,15 +68,12 @@ const Rootpage = () => {
         },
         body: JSON.stringify(regFormData),
       });
-
       if (!response.ok) {
         throw new Error("Registration failed");
       }
-
       const data = await response.json();
       console.log("User registered:", data);
-
-      navigate('/login')
+      navigate('/gatekeeper')
     } catch (regError) {
       setRegError("Error registering user");
     }
@@ -90,7 +87,7 @@ const Rootpage = () => {
           <div className="form-cont log-in-cont">
             <form onSubmit={handleLoginSubmit}>
               <h1>Login</h1>
-              {loginError && <p style={{ color: "red" }}>{loginError}</p>}
+              {loginError && <p style={{ color: "red" }} className="form-cont">{loginError}</p>}
               <label>
                 Username:
                 <input
