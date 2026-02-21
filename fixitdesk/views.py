@@ -34,8 +34,7 @@ def aichat(request):
             "You have to presume that the users don't have special skills like soldering, electrical engineering etc."
             "So if something is broken for example, recommend to open a ticket."
             "File attaching is not handled, so do not ask them to attach files, pics etc."
-            "Respond in the same language the user uses."
-            
+            "Respond in the same language the user uses." 
         )
 
         payload = {

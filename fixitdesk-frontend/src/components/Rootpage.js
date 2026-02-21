@@ -73,7 +73,7 @@ const Rootpage = () => {
       }
       const data = await response.json();
       console.log("User registered:", data);
-      navigate('/gatekeeper')
+      navigate('/dashboard')
     } catch (regError) {
       setRegError("Error registering user");
     }
