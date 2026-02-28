@@ -199,5 +199,5 @@ SIMPLE_JWT = {
     'JWK_URL': None,
 }
 
-GEMINI_API_KEY = config('GEMINI_API_KEY')
+
 MISTRAL_API_KEY = config('MISTRAL_API_KEY')

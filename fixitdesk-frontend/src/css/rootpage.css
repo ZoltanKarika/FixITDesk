@@ -37,7 +37,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 1.2s ease-in-out, opacity 1s ease-in-out;
+  transition: transform 1.2s ease-in-out, opacity 1s ease-in-out;{/*Ezen változtatni a fade "hangolásához"*/}
 }
 
 .form-cont form {

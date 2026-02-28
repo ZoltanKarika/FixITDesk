@@ -81,8 +81,7 @@ const Rootpage = () => {
 
   return (
     <>
-      <div className="root-wrap fade-in">
-        <div className="logo"></div>
+      <div className="root-wrap">
         <div className={`container ${rightActive ? "right-panel-active" : ""}`}>
           <div className="form-cont log-in-cont">
             <form onSubmit={handleLoginSubmit}>
@@ -146,7 +145,7 @@ const Rootpage = () => {
                 onChange={handleRegChange}
                 required
               />
-              <label>Support Staff:</label>
+              {/*<label>Support Staff:</label>
               <input
                 type="checkbox"
                 name="is_support_staff"
@@ -154,7 +153,7 @@ const Rootpage = () => {
                 onChange={() =>
                   setRegFormData({ ...regFormData, is_support_staff: !regFormData.is_support_staff })
                 }
-              />
+              />*/}
               <button type="submit">Register</button>
             </form>
 
