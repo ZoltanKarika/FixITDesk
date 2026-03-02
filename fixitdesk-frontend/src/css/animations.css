@@ -12,9 +12,6 @@
   }
 }
 
-
-
-
 .zoom {
   animation-name: zoom 1s ease forwards;
   transform: scale(0);
@@ -24,8 +21,6 @@
     transform: scale(1);
   }
 }
-
-
 
 @media (prefers-reduced-motion: no-preference) {
   .enter {

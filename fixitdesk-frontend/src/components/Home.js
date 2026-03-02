@@ -22,7 +22,7 @@ const Dashboard = () => {
       }
     };
 
-    checkUser(); // ✅ You forgot to call it!
+    checkUser();
   }, [navigate]);
 
   return (
