@@ -43,7 +43,7 @@ const Rootpage = () => {
         }
       );
       console.log("Login successful:", response.data); // undefined lesz?
-      navigate('/dashboard');
+      navigate('/');
     } catch (loginError) {
       console.error(loginError);
       setLoginError("Error logging in");

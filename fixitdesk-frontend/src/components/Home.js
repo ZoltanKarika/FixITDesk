@@ -31,6 +31,10 @@ const Dashboard = () => {
         <h1>Welcome {user ? user.username : 'Guest'}!</h1>
         <div>This is your dashboard.</div>
       </div>
+      <div>1-placeholder-test</div>
+      <div>2-placeholder-test</div>
+      <div>3-placeholder-test</div>
+      <div>4-placeholder-test</div> 
     </div>
   );
 };

@@ -43,7 +43,7 @@ def aichat(request):
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message}
             ],
-            "temperature": 0.7 # Ez szabályozza a kreativitást
+            "temperature": 0.7 
         }
 
         response = requests.post(API_URL, json=payload, headers=headers)
