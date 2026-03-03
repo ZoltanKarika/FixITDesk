@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import User
 from rest_framework.views import APIView
 from .serializers import RegisterSerializer, LoginSerializer
-from rest_framework_simplejwt.views import TokenRefreshView as BaseTokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 
@@ -164,8 +164,23 @@ class WhoAmIView(APIView):
         'is_support_staff' :request.user.is_support_staff})
 
 
-
-
+class CookieTokenRefreshView(TokenRefreshView):
+    def post(self, request, *args, **kwargs):
+        # cookie-ból kiveszi a refresh tokent
+        request.data['refresh'] = request.COOKIES.get('refresh_token')
+        response = super().post(request, *args, **kwargs)
+        
+        # új access tokent visszarakja cookie-ba
+        response.set_cookie(
+            key='access_token',
+            value=response.data['access'],
+            httponly=True,
+            secure=False,
+            samesite='Lax',
+            max_age=3600,
+        )
+        response.data = {'message': 'Token refreshed'}
+        return response
 
 
 

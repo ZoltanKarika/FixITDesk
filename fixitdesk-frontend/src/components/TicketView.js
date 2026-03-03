@@ -29,26 +29,39 @@ const TicketNotesAndDetailsPage = () => {
   const [editTicketData, setEditTicketData] = useState({});
 
   // Fetch user info
-  useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/accounts/whoami/`, {
+useEffect(() => {
+  const checkUser = async () => {
+    try {
+      let response = await fetch(`${API_URL}/api/accounts/whoami/`, {
+        credentials: 'include',
+      });
+      if (response.status === 401) {
+        const refreshResponse = await fetch(`${API_URL}/api/accounts/token/refresh/`, {
+          method: 'POST',
           credentials: 'include',
         });
-        if (!response.ok) {
+        if (!refreshResponse.ok) {
           navigate('/gatekeeper');
           return;
         }
-        const data = await response.json();
-        setUserInfo(data);
-      } catch (error) {
-        console.error('Error checking user:', error);
-        navigate('/gatekeeper');
+        // refresh ok → ugyanaz a response változó
+        response = await fetch(`${API_URL}/api/accounts/whoami/`, {
+          credentials: 'include',
+        });
       }
-    };
-    checkUser();
-  }, [navigate]);
-
+      if (!response.ok) {
+        navigate('/gatekeeper');
+        return;
+      }
+      const data = await response.json();
+      setUserInfo(data);
+    } catch (error) {
+      console.error('Error checking user:', error);
+      navigate('/gatekeeper');
+    }
+  };
+  checkUser();
+}, [navigate]);
 
 
 
