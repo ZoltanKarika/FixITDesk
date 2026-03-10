@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from './api';
-import { API_URL } from "./config";
 import '../css/rootpage.css';
 import '../css/animations.css'
 
@@ -57,17 +56,9 @@ const Rootpage = () => {
 
   const handleRegSubmit = async (e) => {
     e.preventDefault();
-    const registerPath = `${API_URL}/api/accounts/register/`
-    console.log("RegisterPath ", registerPath)
     try {
       console.log("Sending form data:", regFormData);
-      const response = await fetch(registerPath, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(regFormData),
-      });
+      let response = await api.post('/api/accounts/register/', regFormData);  
       if (!response.ok) {
         throw new Error("Registration failed");
       }

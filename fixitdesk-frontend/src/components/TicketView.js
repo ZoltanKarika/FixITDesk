@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { API_URL } from "./config";
+import api from './api';
 import '../css/ticketview.css'
 
 
@@ -32,23 +33,7 @@ const TicketNotesAndDetailsPage = () => {
 useEffect(() => {
   const checkUser = async () => {
     try {
-      let response = await fetch(`${API_URL}/api/accounts/whoami/`, {
-        credentials: 'include',
-      });
-      if (response.status === 401) {
-        const refreshResponse = await fetch(`${API_URL}/api/accounts/token/refresh/`, {
-          method: 'POST',
-          credentials: 'include',
-        });
-        if (!refreshResponse.ok) {
-          navigate('/gatekeeper');
-          return;
-        }
-        // refresh ok → ugyanaz a response változó
-        response = await fetch(`${API_URL}/api/accounts/whoami/`, {
-          credentials: 'include',
-        });
-      }
+    let response = await api.get('/api/accounts/whoami/');
       if (!response.ok) {
         navigate('/gatekeeper');
         return;
@@ -70,12 +55,8 @@ useEffect(() => {
   useEffect(() => {
     const fetchTicketAndNotes = async () => {
       try {
-        const ticketRes = await fetch(`${API_URL}/api/tickets/${ticketId}/`, {
-          credentials: 'include',
-        });
-        const notesRes = await fetch(`${API_URL}/api/tickets/${ticketId}/notes/`, {
-          credentials: 'include',
-        });
+        const ticketRes = await api.get(`/api/tickets/${ticketId}/`);
+        const notesRes = await api.get(`/api/tickets/${ticketId}/notes/`);
 
         if (ticketRes.ok && notesRes.ok) {
           const ticketData = await ticketRes.json();
@@ -98,16 +79,7 @@ useEffect(() => {
   const handleTicketUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/api/tickets/${ticketId}/`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCookie('csrftoken'),
-        },
-        credentials: 'include',
-        body: JSON.stringify(editTicketData),
-      });
-
+      const response = await api.patch(`/api/tickets/${ticketId}/`, editTicketData);
       if (response.ok) {
         const updatedTicket = await response.json();
         setTicket(updatedTicket);
@@ -123,19 +95,8 @@ useEffect(() => {
   // Notes CRUD
   const handleAddNote = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/tickets/${ticketId}/notes/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCookie('csrftoken'),
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          content: newNote,
-          note_type: newNoteType,
-        }),
-      });
-
+      const  response = await api.post(`/api/tickets/${ticketId}/notes/`,{content: newNote,
+          note_type: newNoteType});
       if (response.ok) {
         const addedNote = await response.json();
         setNotes(prev => [addedNote, ...prev]); // New note on top
@@ -150,16 +111,7 @@ useEffect(() => {
 
   const handleUpdateNote = async (noteId) => {
     try {
-      const response = await fetch(`${API_URL}/api/notes/${noteId}/`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCookie('csrftoken'),
-        },
-        credentials: 'include',
-        body: JSON.stringify({ content: editingContent }),
-      });
-
+      const response = await api.patch(`/api/notes/${noteId}/`, {content: editingContent});
       if (response.ok) {
         const updatedNote = await response.json();
         setNotes(prev => prev.map(note => note.id === noteId ? updatedNote : note));
@@ -174,14 +126,7 @@ useEffect(() => {
     if (!window.confirm('Are you sure you want to delete this note?')) return;
 
     try {
-      const response = await fetch(`${API_URL}/api/notes/${noteId}/`, {
-        method: 'DELETE',
-        headers: {
-          'X-CSRFToken': getCookie('csrftoken'),
-        },
-        credentials: 'include',
-      });
-
+      const response = await api.delete(`/api/notes/${noteId}/`);
       if (response.ok) {
         setNotes(prev => prev.filter(note => note.id !== noteId));
       }

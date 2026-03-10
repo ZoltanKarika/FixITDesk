@@ -1,8 +1,8 @@
 // src/components/Tickets.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from "./config";
-
+import api from './api';
+//talán ide is kell egy checkuser
 const Tickets = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true); // To track loading state
@@ -12,9 +12,7 @@ const Tickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await fetch(`${ API_URL }/api/tickets/`, {
-          credentials: 'include', // important if cookies/auth are needed
-        });
+        const response = await api.get('/api/tickets/');
 
         // Handle Unauthorized (401) response
         if (response.status === 401) {

@@ -10,7 +10,6 @@ const Logout = () => {
     const logoutUser = async () => {
       try {
         const response = await api.post('/api/accounts/logout/');
-        //console.log(response.data.message); // "Logged out successfully!"
         navigate('/gatekeeper')
         return true;
       } catch (error) {

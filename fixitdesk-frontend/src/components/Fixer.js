@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import "../css/fixer.css";
 import '../css/animations.css';
+import api from './api';
 
 export const Fixer = () => {
   const [messages, setMessages] = useState([]);
@@ -26,12 +27,7 @@ export const Fixer = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/chat/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
-      });
-
+      const response = await api.post('/api/chat/', {message});
       const data = await response.json();
 
       // Backend hiba kezelése

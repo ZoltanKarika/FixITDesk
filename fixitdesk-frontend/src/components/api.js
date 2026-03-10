@@ -27,10 +27,11 @@ async function request(path, { method = 'GET', body = null, headers = {}, ...cus
   let response = await fetch(`${API_URL}${path}`, options);
 
   if (response.status === 401) {
-    const refreshResponse = await fetch(`${API_URL}/api/accounts/token/refresh/`, {
+    const refreshResponse = await fetch(`${API_URL}/api/token/refresh/`, {
       method: 'POST',
       credentials: 'include',
     });
+    console.log("RE-FRESH");
 
     if (refreshResponse.ok) {
       response = await fetch(`${API_URL}${path}`, options);

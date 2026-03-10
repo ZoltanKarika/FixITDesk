@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
 
-const Dashboard = () => {
+const Home = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate(); // ✅ Import and use navigate
 
@@ -39,4 +39,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Home;

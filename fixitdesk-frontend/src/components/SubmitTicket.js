@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from "./config";
+import api from './api';
 import '../css/ticketsubmit.css';
-
+//checkuser?
 const SubmitTicket = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -19,24 +19,14 @@ const SubmitTicket = () => {
 
     try {
       // Make an API request to submit the ticket
-      const response = await fetch(`${API_URL}/api/tickets/`, {
-        method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        credentials: 'include', // Important: Ensures cookies (including HttpOnly cookies) are sent with the request
-        body: JSON.stringify({
-          title,
+      const response = await api.post('/api/tickets/',{ title,
           description,
           type,
           status,
           priority,
           impact,
           department,
-          submitted_via: 'api', // Automatically set to 'api' as it's coming from the frontend
-        }),
-      });
-
+          submitted_via: 'api'});
       if (!response.ok) {
         // Handle different responses from the backend
         if (response.status === 401) {
