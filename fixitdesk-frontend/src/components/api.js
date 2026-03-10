@@ -1,4 +1,3 @@
-// src/api.js
 import Cookies from "js-cookie";
 import { API_URL } from "./config";
 
@@ -9,7 +8,7 @@ function getCSRFToken() {
 async function request(path, { method = 'GET', body = null, headers = {}, ...customOptions } = {}) {
   const options = {
     method,
-    credentials: 'include', // Always include cookies
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       ...headers,
@@ -17,7 +16,6 @@ async function request(path, { method = 'GET', body = null, headers = {}, ...cus
     ...customOptions,
   };
 
-  // Attach CSRF token for unsafe methods
   if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase())) {
     options.headers['X-CSRFToken'] = getCSRFToken();
   }
@@ -26,17 +24,24 @@ async function request(path, { method = 'GET', body = null, headers = {}, ...cus
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(`${API_URL}${path}`, options);
+  let response = await fetch(`${API_URL}${path}`, options);
 
-  // Optionally handle unauthorized globally
   if (response.status === 401) {
-    console.warn('Unauthorized! Maybe redirect to login?');
+    const refreshResponse = await fetch(`${API_URL}/api/accounts/token/refresh/`, {
+      method: 'POST',
+      credentials: 'include',
+    });
+
+    if (refreshResponse.ok) {
+      response = await fetch(`${API_URL}${path}`, options);
+    } else {
+      throw new Error('Session expired');
+    }
   }
 
   return response;
 }
 
-// Export simple helpers
 const api = {
   get: (path, options = {}) => request(path, { ...options, method: 'GET' }),
   post: (path, body, options = {}) => request(path, { ...options, method: 'POST', body }),

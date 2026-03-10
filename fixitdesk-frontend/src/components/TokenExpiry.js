@@ -20,11 +20,7 @@ const TokenExpiry = () => {
 
       try {
         // Send request to check if session is still valid
-        const response = await fetch(`${API_URL}/api/accounts/whoami/`, {
-          method: 'GET',
-          credentials: 'include',
-        });
-
+        const response = await api.get('/api/accounts/whoami/');
         if (response.status === 401) {
           console.log("Session expired, redirecting to login...");
           navigate('/gatekeeper');

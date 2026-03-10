@@ -21,9 +21,9 @@ const SubmitTicket = () => {
       // Make an API request to submit the ticket
       const response = await fetch(`${API_URL}/api/tickets/`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+          headers: {
+            'Content-Type': 'application/json',
+          },
         credentials: 'include', // Important: Ensures cookies (including HttpOnly cookies) are sent with the request
         body: JSON.stringify({
           title,
