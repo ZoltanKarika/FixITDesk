@@ -6,10 +6,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import User
 from rest_framework.views import APIView
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer, AdminUserUpdateSerializer, AdminUserListSerializer
+
 from rest_framework_simplejwt.views import TokenRefreshView
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from rest_framework.permissions import IsAuthenticated
 
 from django.http import JsonResponse
 
@@ -30,7 +32,38 @@ class RegisterView(generics.CreateAPIView):
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny 
+from rest_framework.exceptions import PermissionDenied
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
+
+class AdminUserListView(generics.ListAPIView):
+    serializer_class = AdminUserListSerializer
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ["department", "is_support_staff"]
+    search_fields = ["username", "email"]
+    permission_classes = [IsAuthenticated]  # login kell
+
+    def get_queryset(self):
+        user = self.request.user
+        if not user.is_staff and not user.is_support_staff:
+            raise PermissionDenied("You do not have permission to view this page.")
+        return User.objects.all().order_by("id")
+
+class AdminUserUpdateView(generics.RetrieveUpdateAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = AdminUserUpdateSerializer
+    permission_classes = []
+
+    def get_object(self):
+        user = super().get_object()
+
+        # Prevent modifying your own account
+        if user == self.request.user:
+            raise PermissionDenied("You cannot modify your own account.")
+
+        return user
 
 class LoginView(APIView):
     permission_classes = [AllowAny]

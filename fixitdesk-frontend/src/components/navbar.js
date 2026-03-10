@@ -34,7 +34,7 @@ const NavBar = () => {
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li className="hideOnMobile">
-            <Link>Admin??</Link>
+            <Link to="/admin/users">User Management</Link>
           </li>
           <li className="hideOnMobile">
             <Link to="/accounts/logout">Logout</Link>

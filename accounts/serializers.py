@@ -28,6 +28,29 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         exclude = ('password', )  # Exclude the password field from serialization
 
+class AdminUserListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+            "department",
+            "is_support_staff",
+        ]
+
+class AdminUserUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "email",
+            "department",
+            "is_support_staff",
+            
+        ]
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
