@@ -2,9 +2,11 @@
 import { Link } from "react-router-dom";
 import '../css/navbar.css';
 import logo from '../img/ChatGPT_generated_logo.png';
+import { useUserHandler } from "./UserHandler";
 
 
 const NavBar = () => {
+  const { user, loginHandler, logoutHandler } = useUserHandler();
   function showSidebar() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.style.display = 'flex';
@@ -19,7 +21,7 @@ const NavBar = () => {
         <ul>
           <li><img src={logo} alt="FixIT-logo" className="logo" /></li>
           <li className="hideOnMobile">
-            <Link to="/">Home</Link>
+            <Link to="/">Home-MaybeSomeINfo</Link>
           </li>
           <li className="hideOnMobile">
             <Link to="/fixer">Mr.Fixer</Link>
@@ -31,11 +33,11 @@ const NavBar = () => {
             <Link to="/submitticket">Create ticket</Link>
           </li>
           <li className="hideOnMobile">
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard">Dashboard-StatOrDel</Link>
           </li>
-          <li className="hideOnMobile">
+          {user?.is_support_staff && <li className="hideOnMobile">
             <Link to="/admin/users">User Management</Link>
-          </li>
+          </li>}
           <li className="hideOnMobile">
             <Link to="/accounts/logout">Logout</Link>
           </li>

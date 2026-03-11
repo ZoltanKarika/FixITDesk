@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
 
-const Home = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate(); // ✅ Import and use navigate
+import { useUserHandler } from './UserHandler';
 
+const Home = () => {
+  const{user, loginHandler, logoutHandler} = useUserHandler();
+  const navigate = useNavigate(); // ✅ Import and use navigate
+  console.log(user);
   useEffect(() => {
     const checkUser = async () => {
       try {
         const response = await api.get('/api/accounts/whoami/');
         if (!response.ok) {
+          logoutHandler();
           navigate('/gatekeeper');
           return;
         }
         const data = await response.json();
-        setUser(data);
+        loginHandler(data);
       } catch (error) {
         console.error('Error checking user:', error);
+        logoutHandler();
         navigate('/gatekeeper');
       }
     };

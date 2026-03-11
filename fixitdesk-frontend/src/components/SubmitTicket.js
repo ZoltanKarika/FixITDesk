@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
 import '../css/ticketsubmit.css';
+
+import { useUserHandler } from './UserHandler';
+
 //checkuser?
 const SubmitTicket = () => {
+  const { user, loginHandler, logoutHandler } = useUserHandler();
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [type, setType] = useState('incident');
@@ -19,19 +24,23 @@ const SubmitTicket = () => {
 
     try {
       // Make an API request to submit the ticket
-      const response = await api.post('/api/tickets/',{ title,
-          description,
-          type,
-          status,
-          priority,
-          impact,
-          department,
-          submitted_via: 'api'});
+      const response = await api.post('/api/tickets/', {
+        title,
+        description,
+        type,
+        status,
+        priority,
+        impact,
+        department,
+        submitted_via: 'api'
+      });
       if (!response.ok) {
         // Handle different responses from the backend
         if (response.status === 401) {
           setError('You must be logged in to submit a ticket.');
           navigate('/gatekeeper');
+          logoutHandler();
+
           return;
         }
         throw new Error('Failed to submit the ticket');

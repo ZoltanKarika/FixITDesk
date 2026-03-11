@@ -36,8 +36,6 @@ class TicketListCreateView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
-
-
 class TicketRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
@@ -47,16 +45,6 @@ class TicketRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         ticket = super().get_object()
         return ticket
     
-class NoteCreateView(generics.CreateAPIView):
-    serializer_class = NoteSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def perform_create(self, serializer):
-        # Automatically assign the ticket for the note
-        ticket = Ticket.objects.get(id=self.kwargs['ticket_id'])
-        serializer.save(user=self.request.user, ticket=ticket)
-
-
 class NoteListCreateView(generics.ListCreateAPIView):
     serializer_class = NoteSerializer
     permission_classes = [IsAuthenticated]
@@ -85,6 +73,7 @@ class NoteListCreateView(generics.ListCreateAPIView):
         return super().create(request, *args, **kwargs)
     
 class NoteRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     permission_classes = [IsAuthenticated]
@@ -97,3 +86,36 @@ class NoteRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
             raise PermissionDenied("You do not have permission to edit or delete this note.")
 
         return note
+    
+
+
+
+'''
+class IsSupportStaffOrOwner(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        # Olvasás - saját ticketedet láthatod, staff mindent
+        if request.method == 'GET':
+            if request.user.is_support_staff:
+                return True
+            return obj.user == request.user
+        
+        # Törlés - a tulajdonos is törölheti a sajátját
+        if request.method == 'DELETE':
+            if request.user.is_support_staff:
+                return True
+            return obj.user == request.user
+        
+        # Módosítás - csak support staff
+        if request.method in ['PUT', 'PATCH']:
+            return request.user.is_support_staff
+
+
+class TicketRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer
+    permission_classes = [permissions.IsAuthenticated, IsSupportStaffOrOwner]
+
+    def get_object(self):
+        ticket = super().get_object()
+        return ticket
+'''

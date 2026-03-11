@@ -1,9 +1,14 @@
 // src/components/Tickets.js
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
+
+import { useUserHandler } from './UserHandler';
 //talán ide is kell egy checkuser
 const Tickets = () => {
+
+  const { user, loginHandler, logoutHandler } = useUserHandler();
+
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true); // To track loading state
   const [error, setError] = useState(null); // To track error state
@@ -18,6 +23,7 @@ const Tickets = () => {
         if (response.status === 401) {
           console.log('Unauthorized. Redirecting to login...');
           navigate('/gatekeeper'); // Redirect to login if unauthorized
+          logoutHandler();
           return;
         }
 
@@ -43,17 +49,17 @@ const Tickets = () => {
   }
 
   return (
-<div className='p-top enter'>
-    <div className='ticket-details-page'>
-      <h1 >Tickets</h1>
-      {error && <div style={{ color: 'red' }}>{error}</div>} {/* Show error message if any */}
-      <ul>
-        {tickets.map(ticket => (
-          <li key={ticket.id}>{ticket.title}</li>
-        ))}
-      </ul>
+    <div className='p-top enter'>
+      <div className='ticket-details-page'>
+        <h1 >Tickets</h1>
+        {error && <div style={{ color: 'red' }}>{error}</div>} {/* Show error message if any */}
+        <ul>
+          {tickets.map(ticket => (
+            <li key={ticket.id}>{ticket.title}</li>
+          ))}
+        </ul>
+      </div>
     </div>
-</div>
   );
 };
 

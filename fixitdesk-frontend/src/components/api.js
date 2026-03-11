@@ -31,7 +31,7 @@ async function request(path, { method = 'GET', body = null, headers = {}, ...cus
       method: 'POST',
       credentials: 'include',
     });
-    console.log("RE-FRESH");
+    console.log("REFRESHED");
 
     if (refreshResponse.ok) {
       response = await fetch(`${API_URL}${path}`, options);

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { API_URL } from "./config";
 import api from './api';
-import '../css/ticketview.css'
+import '../css/ticketview.css';
 
-
+import { useUserHandler } from './UserHandler';
 
 
 function getCookie(name) {
@@ -14,6 +13,8 @@ function getCookie(name) {
 }
 
 const TicketNotesAndDetailsPage = () => {
+
+  const { user, loginHandler, logoutHandler } = useUserHandler();
   const { ticketId } = useParams();
   const navigate = useNavigate();
 
@@ -30,23 +31,25 @@ const TicketNotesAndDetailsPage = () => {
   const [editTicketData, setEditTicketData] = useState({});
 
   // Fetch user info
-useEffect(() => {
-  const checkUser = async () => {
-    try {
-    let response = await api.get('/api/accounts/whoami/');
-      if (!response.ok) {
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        let response = await api.get('/api/accounts/whoami/');
+        if (!response.ok) {
+          navigate('/gatekeeper');
+          logoutHandler();
+          return;
+        }
+        const data = await response.json();
+        setUserInfo(data);
+      } catch (error) {
+        console.error('Error checking user:', error);
         navigate('/gatekeeper');
-        return;
+        logoutHandler();
       }
-      const data = await response.json();
-      setUserInfo(data);
-    } catch (error) {
-      console.error('Error checking user:', error);
-      navigate('/gatekeeper');
-    }
-  };
-  checkUser();
-}, [navigate]);
+    };
+    checkUser();
+  }, [navigate]);
 
 
 
@@ -95,8 +98,10 @@ useEffect(() => {
   // Notes CRUD
   const handleAddNote = async () => {
     try {
-      const  response = await api.post(`/api/tickets/${ticketId}/notes/`,{content: newNote,
-          note_type: newNoteType});
+      const response = await api.post(`/api/tickets/${ticketId}/notes/`, {
+        content: newNote,
+        note_type: newNoteType
+      });
       if (response.ok) {
         const addedNote = await response.json();
         setNotes(prev => [addedNote, ...prev]); // New note on top
@@ -111,7 +116,7 @@ useEffect(() => {
 
   const handleUpdateNote = async (noteId) => {
     try {
-      const response = await api.patch(`/api/notes/${noteId}/`, {content: editingContent});
+      const response = await api.patch(`/api/notes/${noteId}/`, { content: editingContent });
       if (response.ok) {
         const updatedNote = await response.json();
         setNotes(prev => prev.map(note => note.id === noteId ? updatedNote : note));

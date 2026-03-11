@@ -89,4 +89,5 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.get_note_type_display()} on {self.ticket.title} by {self.user.username} at {self.created_at}"
+        return f"{self.ticket.title} by {self.user.username} at {self.created_at}"
+       # return f"{self.get_note_type_display()} on {self.ticket.title} by {self.user.username} at {self.created_at}"

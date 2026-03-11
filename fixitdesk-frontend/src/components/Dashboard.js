@@ -4,9 +4,12 @@ import '../css/dashboard.css'
 import '../css/animations.css'
 import api from './api';
 
+import { useUserHandler } from './UserHandler';
+
 const Dashboard = () => {
+
+  const { user, loginHandler, logoutHandler } = useUserHandler();
   const [tickets, setTickets] = useState([]);
-  const [userInfo, setUserInfo] = useState(null); // Store user info like username, is_staff
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,14 +17,16 @@ const Dashboard = () => {
       try {
         const response = await api.get('/api/accounts/whoami/');
         if (!response.ok) {
+          logoutHandler();
           navigate('/gatekeeper');
           return;
         }
         const data = await response.json();
-        setUserInfo(data);
+        loginHandler(data);
       } catch (error) {
         console.error('Error checking user:', error);
-        navigate('/gatekeeper');
+        logoutHandler();
+        navigate('/gatekeeper');        
       }
     };
 
@@ -45,12 +50,12 @@ const Dashboard = () => {
 
       <h1 className="page-title">Dashboard</h1>
 
-      {userInfo ? (
+      {user ? (
         <div className="dashboard-panel">
 
-          <h1>Welcome, {userInfo.username}!</h1>
+          <h1>Welcome, {user.username}!</h1>
 
-          {userInfo.is_support_staff && (
+          {user.is_support_staff && (
             <button className="admin-btn">Admin Mode</button>
           )}
 

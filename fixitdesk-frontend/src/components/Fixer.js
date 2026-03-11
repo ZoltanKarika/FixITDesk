@@ -2,8 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import "../css/fixer.css";
 import '../css/animations.css';
 import api from './api';
+import { useUserHandler } from './UserHandler';
 
 export const Fixer = () => {
+  const{user, loginHandler, logoutHandler} = useUserHandler();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -69,7 +71,7 @@ export const Fixer = () => {
         <div className="chat-box" ref={chatBoxRef}>
           {messages.length === 0 && (
             <div className="message ai">
-              <p>Greetings!</p>
+              <p>Greetings {user.username}!</p>
               <p>I'm Mr.Fixer, your AI helper, perhaps I can help you before you open a ticket.</p>
               <p>So what can I do for you today?</p>
             </div>

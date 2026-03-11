@@ -2,9 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from './api';
 import '../css/rootpage.css';
-import '../css/animations.css'
+import '../css/animations.css';
+
+import { useUserHandler } from "./UserHandler";
+
 
 const Rootpage = () => {
+  const { loginHandler } = useUserHandler();
   const [rightActive, setRightActive] = useState(false);// for Design
   const [loginFormData, setLoginFormData] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState("");
@@ -26,6 +30,7 @@ const Rootpage = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
   const handleLoginSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload
     try {
@@ -42,6 +47,10 @@ const Rootpage = () => {
         }
       );
       console.log("Login successful:", response.data); // undefined lesz?
+
+      const whoami = await api.get('/api/accounts/whoami/');
+      loginHandler(whoami.data);
+
       navigate('/');
     } catch (loginError) {
       console.error(loginError);
@@ -58,13 +67,13 @@ const Rootpage = () => {
     e.preventDefault();
     try {
       console.log("Sending form data:", regFormData);
-      let response = await api.post('/api/accounts/register/', regFormData);  
+      let response = await api.post('/api/accounts/register/', regFormData);
       if (!response.ok) {
         throw new Error("Registration failed");
       }
       const data = await response.json();
       console.log("User registered:", data);
-      navigate('/dashboard')
+      navigate('/rootpage')
     } catch (regError) {
       setRegError("Error registering user");
     }

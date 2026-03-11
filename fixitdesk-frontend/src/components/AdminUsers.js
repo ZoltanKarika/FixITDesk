@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
 
+import { useUserHandler } from './UserHandler';
+
 const AdminUsers = () => {
+    const { user, loginHandler, logouthandler } = useUserHandler();
     const [users, setUsers] = useState([]);
-    const [userInfo, setUserInfo] = useState(null);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -14,10 +16,11 @@ const AdminUsers = () => {
                 const res = await api.get('/api/accounts/whoami/');
                 if (!res.ok) {
                     navigate('/gatekeeper');
+                    logouthandler();
                     return;
                 }
                 const data = await res.json();
-                setUserInfo(data);
+                loginHandler(data);
 
                 if (!data.is_support_staff) {
                     navigate('/dashboard'); // nem admin
@@ -25,11 +28,13 @@ const AdminUsers = () => {
                 }
 
                 // Fetch admin users csak ha support staff
-                const usersRes = await api.get('/api/accounts/admin/users/');
-                if (!usersRes.ok) throw new Error('Failed to fetch users');
-                const usersData = await usersRes.json();
-                setUsers(usersData.results || usersData);
 
+                if (user?.is_support_staff) {
+                    const usersRes = await api.get('/api/accounts/admin/users/');
+                    if (!usersRes.ok) throw new Error('Failed to fetch users');
+                    const usersData = await usersRes.json();
+                    setUsers(usersData.results || usersData);
+                }
             } catch (err) {
                 console.error(err);
                 setError(err.message);
@@ -40,7 +45,7 @@ const AdminUsers = () => {
     }, [navigate]);
 
     if (error) return <p>Error: {error}</p>;
-    if (!userInfo) return <p>Loading user info...</p>;
+    if (!user) return <p>Loading user info...</p>;
 
     return (
         <div>
