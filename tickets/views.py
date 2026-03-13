@@ -90,7 +90,7 @@ class NoteRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 
 
-'''
+'''(így tulajdonos törölheti a saját ticket-jét, visszavonhatja, status-t, módosítást csak support staff végezhet)
 class IsSupportStaffOrOwner(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # Olvasás - saját ticketedet láthatod, staff mindent

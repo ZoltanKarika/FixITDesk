@@ -46,12 +46,12 @@ const Dashboard = () => {
 
 
   return (
-    <div className="dashboard-page fade-in enter p-top">
+    <div className="dashboard-page p-top">
 
-      <h1 className="page-title">Dashboard</h1>
+      <h1 className="page-title fade-in enter">Dashboard</h1>
 
       {user ? (
-        <div className="dashboard-panel">
+        <div className="dashboard-panel fade-in enter">
 
           <h1>Welcome, {user.username}!</h1>
 

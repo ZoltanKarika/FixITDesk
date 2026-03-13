@@ -62,6 +62,9 @@ const NavBar = () => {
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
+          {user?.is_support_staff && <li>
+            <Link to="/admin/users">User Management</Link>
+          </li>}
           <li>
             <Link to="/accounts/logout">Logout</Link>
           </li>

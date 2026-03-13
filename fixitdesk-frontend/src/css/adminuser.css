@@ -1,0 +1,109 @@
+.admin-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, .92);
+}
+
+.admin-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+    letter-spacing: -0.05em;
+    color: rgba(255, 255, 255, .92);
+}
+
+.admin-user-wrapper {
+    padding: 20px 22px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .12);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+    backdrop-filter: blur(10px);
+    margin-bottom: 22px;
+
+}
+
+.admin-user-lines {
+    width: min(100%);
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+
+}
+
+.admin-user-lines table {
+   
+    gap: 5px;
+}
+
+.admin-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.admin-wrap thead {
+    background: rgba(255, 255, 255, .08);
+
+}
+
+.admin-wrap thead td {
+    padding: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .85);
+}
+
+.admin-wrap tbody tr{
+  transition: background-color .12s ease;
+}
+
+.admin-wrap tbody tr:hover{
+  background: rgba(255,255,255,.05);
+}
+
+.admin-wrap tbody td{
+  padding: 12px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.admin-wrap .view-btn{
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.9);
+  cursor: pointer;
+  transition: transform .12s ease, transform .12s ease;
+}
+
+.admin-wrap .view-btn:hover{
+  background: rgba(255,255,255,.15);
+  transform: translateY(-1px);
+}
+
+.admin-wrap button{
+  margin-top: 4px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(90deg, rgba(99,102,241,.95), rgba(56,189,248,.85));
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s ease, filter .12s ease;
+}
+
+.admin-wrap button:hover{
+  filter: brightness(1.06);
+  transform: translateY(-3px);
+  transform: scale(1.05);
+}
+
+.admin-wrape button:active{
+  transform: translateY(0) scale(.99);
+}
