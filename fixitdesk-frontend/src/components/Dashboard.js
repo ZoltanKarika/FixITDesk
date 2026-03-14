@@ -26,7 +26,7 @@ const Dashboard = () => {
       } catch (error) {
         console.error('Error checking user:', error);
         logoutHandler();
-        navigate('/gatekeeper');        
+        navigate('/gatekeeper');
       }
     };
 
@@ -84,6 +84,7 @@ const Dashboard = () => {
                     <tr>
                       <td>
                         {ticket.id}
+                       {console.log(ticket)}
                       </td>
                       <td>
                         {ticket.title}
@@ -101,7 +102,7 @@ const Dashboard = () => {
                 </tbody>
                 <tfoot>
                   <tr>
-
+                    
                   </tr>
                 </tfoot>
               </table>

@@ -6,7 +6,7 @@ import '../css/adminuser.css';
 import { useUserHandler } from './UserHandler';
 
 const AdminUsers = () => {
-    const { user, loginHandler, logouthandler } = useUserHandler();
+    const { user, loginHandler, logoutHandler } = useUserHandler();
 
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ const AdminUsers = () => {
                 const res = await api.get('/api/accounts/whoami/');
                 if (!res.ok) {
                     navigate('/gatekeeper');
-                    logouthandler();
+                    logoutHandler();
                     return;
                 }
                 const data = await res.json();
@@ -32,12 +32,11 @@ const AdminUsers = () => {
 
                 // Fetch admin users csak ha support staff
 
-                if (user?.is_support_staff) {
-                    const usersRes = await api.get('/api/accounts/admin/users/');
-                    if (!usersRes.ok) throw new Error('Failed to fetch users');
-                    const usersData = await usersRes.json();
-                    setUsers(usersData.results || usersData);
-                }
+                const usersRes = await api.get('/api/accounts/admin/users/');
+                if (!usersRes.ok) throw new Error('Failed to fetch users');
+                const usersData = await usersRes.json();
+                setUsers(usersData.results || usersData);
+
             } catch (err) {
                 console.error(err);
                 setError(err.message);
@@ -73,13 +72,13 @@ const AdminUsers = () => {
                                     users.map(u => (
                                         <tr key={u.id}>
                                             <td>{u.id}</td>
-                                             {console.log(u)}
+                                            {console.log(u)}
                                             <td>{u.username}</td>
                                             <td>{u.email}</td>
                                             <td>{u.department}</td>
                                             {/*<td>{u.role}</td>*/}
                                             <td>{u.is_support_staff ? 'Yes' : 'No'}</td>
-                                        </tr>                                       
+                                        </tr>
                                     ))}
                             </tbody>
                         </table>

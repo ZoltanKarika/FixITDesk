@@ -55,6 +55,7 @@ const Rootpage = () => {
     } catch (loginError) {
       console.error(loginError);
       setLoginError("Error logging in");
+   
     }
   };
 
@@ -73,7 +74,7 @@ const Rootpage = () => {
       }
       const data = await response.json();
       console.log("User registered:", data);
-      navigate('/rootpage')
+      navigate('/gatekeeper')
     } catch (regError) {
       setRegError("Error registering user");
     }

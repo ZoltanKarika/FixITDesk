@@ -21,7 +21,7 @@ const NavBar = () => {
         <ul>
           <li><img src={logo} alt="FixIT-logo" className="logo" /></li>
           <li className="hideOnMobile">
-            <Link to="/">Home-MaybeSomeINfo</Link>
+            <Link to="/">Home</Link>
           </li>
           <li className="hideOnMobile">
             <Link to="/fixer">Mr.Fixer</Link>
@@ -37,6 +37,9 @@ const NavBar = () => {
           </li>
           {user?.is_support_staff && <li className="hideOnMobile">
             <Link to="/admin/users">User Management</Link>
+          </li>}
+           {user?.is_support_staff && <li className="hideOnMobile">
+            <Link to="/admin/users2">User Management2</Link>
           </li>}
           <li className="hideOnMobile">
             <Link to="/accounts/logout">Logout</Link>
@@ -64,6 +67,9 @@ const NavBar = () => {
           </li>
           {user?.is_support_staff && <li>
             <Link to="/admin/users">User Management</Link>
+          </li>}
+          {user?.is_support_staff && <li className="hideOnMobile">
+            <Link to="/admin/users2">User Management2</Link>
           </li>}
           <li>
             <Link to="/accounts/logout">Logout</Link>

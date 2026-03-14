@@ -12,6 +12,7 @@ import InnerLayout from './components/InnerLayout';
 import Rootpage from './components/Rootpage';
 import Fixer from './components/Fixer';
 import AdminUsers from "./components/AdminUsers";
+import AdminUsersSecond from './components/AdminUsersSecond';
 
 
 
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tickets/:ticketId/" element={<TicketPage />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/users2" element={<AdminUsersSecond />} />
         </Route>
 
       </Routes>
