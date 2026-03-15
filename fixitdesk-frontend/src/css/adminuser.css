@@ -15,14 +15,13 @@
 }
 
 .admin-user-wrapper {
-  padding: 20px 22px;
-  border-radius: 16px;
   background: rgba(255, 255, 255, .06);
   border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 16px;
+  padding: 20px 22px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
   backdrop-filter: blur(10px);
   margin-bottom: 22px;
-
 }
 
 .admin-user-lines {
@@ -44,6 +43,7 @@
   width: 100%;
   border-collapse: collapse;
   text-align: center;
+
 }
 
 .admin-wrap thead {

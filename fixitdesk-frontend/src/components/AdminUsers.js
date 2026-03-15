@@ -26,7 +26,8 @@ const AdminUsersSecond = () => {
                 loginHandler(data);
 
                 if (!data.is_support_staff) {
-                    navigate('/dashboard');
+                    navigate('/gatekeeper');
+                    logoutHandler();
                     return;
                 }
 
@@ -103,7 +104,7 @@ const AdminUsersSecond = () => {
                 <div className='admin-user-wrapper'>
                     <h1>Users</h1>
                     {saveError && <p style={{ color: 'red' }}>{saveError}</p>}
-                    <p className='admin-hint'>Click on a line to modify. <spun className="error-message">Own account can not be modified!</spun></p>
+                    <p className='admin-hint'>Click on a line to modify. <span className="error-message">Own account can not be modified!</span></p>
                     <div className='admin-user-lines'>
                         <table>
                             <thead>

@@ -1,0 +1,72 @@
+.home-wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, .92);
+}
+
+.home-welcome {
+    margin-bottom: 36px;
+}
+
+.home-welcome h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: rgba(255, 255, 255, .92);
+    margin-bottom: 8px;
+}
+
+.home-welcome p {
+    color: rgba(255, 255, 255, .55);
+    font-size: 16px;
+}
+
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.home-card {
+    position: relative;
+    z-index: 20;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 16px;
+    padding: 26px 26px;
+    box-shadow: 0 14px 50px rgba(0, 0, 0, .35);
+    backdrop-filter: blur(20px);
+    cursor: pointer;
+    transition: transform .15s ease, filter .15s ease, background .15s ease;
+    animation: enter .4s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.home-card:hover {
+    background: rgba(0, 0, 0, .35);
+    transform: translateY(-4px);
+    filter: brightness(1.08);
+}
+
+.home-card:active {
+    transform: translateY(0) scale(.99);
+}
+
+.home-card-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.home-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .92);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.home-card-desc {
+    font-size: 15px;
+    color: rgba(255, 255, 255, .55);
+    line-height: 1.6;
+    margin: 0;
+}

@@ -56,11 +56,12 @@ const NavBar = () => {
           <li>
             <Link to="/fixer">Mr.Fixer</Link>
           </li>
+       
+            <li>
+              <Link to="/submitticket">Create ticket</Link>   {!user?.is_support_staff &&""}
+            </li>
           <li>
-            <Link to="/submitticket">Create ticket</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Statistics</Link>
+            <Link to="/statistics">Statistics</Link>
           </li>
           {user?.is_support_staff && <li>
             <Link to="/admin/users">Manage Users</Link>

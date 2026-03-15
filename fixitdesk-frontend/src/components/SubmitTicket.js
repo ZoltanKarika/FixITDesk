@@ -48,7 +48,7 @@ const SubmitTicket = () => {
 
       const data = await response.json();
       if (data && data.id) {
-        navigate('/dashboard'); // Redirect to the dashboard after successful submission
+        navigate('/tickets'); // Redirect to the dashboard after successful submission
       }
     } catch (error) {
       console.error('Error submitting ticket:', error);

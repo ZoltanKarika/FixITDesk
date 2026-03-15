@@ -2,11 +2,12 @@ from rest_framework import serializers
 from .models import Note, Ticket
 
 class TicketSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Ticket
         fields = '__all__'
         read_only_fields = ['id', 'created_at', 'updated_at', 'user']
-
+   
 
 class NoteSerializer(serializers.ModelSerializer):
     # Optionally, you can include user and ticket information in the response

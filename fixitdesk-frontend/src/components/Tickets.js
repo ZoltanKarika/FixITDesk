@@ -72,6 +72,9 @@ const NewTickets = () => {
                       ID
                     </td>
                     <td>
+                      Username
+                    </td>
+                    <td>
                       Short Description
                     </td>
                     <td>
@@ -84,12 +87,15 @@ const NewTickets = () => {
                     <tr>
                       <td>
                         {ticket.id}
-                       {console.log(ticket)}
+                        {console.log(ticket)}
+                      </td>
+                      <td>
+                        {ticket.username}
                       </td>
                       <td>
                         {ticket.title}
                       </td>
-                      <td>
+                      <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : 'green'}>
                         {ticket.status}
                       </td>
                       <td>
@@ -102,7 +108,7 @@ const NewTickets = () => {
                 </tbody>
                 <tfoot>
                   <tr>
-                    
+
                   </tr>
                 </tfoot>
               </table>
@@ -113,9 +119,10 @@ const NewTickets = () => {
         </div>
       ) : (
         <p className="loading">Loading user information...</p>
-      )}
+      )
+      }
 
-    </div>
+    </div >
   );
 };
 

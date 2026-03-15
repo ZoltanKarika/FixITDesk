@@ -67,7 +67,7 @@ code {
 
 .content-layer{
   position: relative;
-  z-index: 5;
+  z-index: 10;
 }
 
 .p-top{

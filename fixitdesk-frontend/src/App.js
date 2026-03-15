@@ -35,7 +35,6 @@ const App = () => {
           <Route path="/tickets/:ticketId/" element={<TicketPage />} />
           <Route path="/admin/users" element={<AdminUsers />} />
         </Route>
-
       </Routes>
 
     </div>
