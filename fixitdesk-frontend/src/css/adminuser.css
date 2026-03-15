@@ -68,6 +68,7 @@
 .admin-wrap tbody td {
   padding: 12px;
   border-top: 1px solid rgba(255, 255, 255, .06);
+  cursor: pointer;
 }
 
 .admin-wrap .view-btn {
@@ -106,4 +107,45 @@
 
 .admin-wrape button:active {
   transform: translateY(0) scale(.99);
+}
+
+
+
+input {
+  transition: all 1s ease;
+  animation: fadeIn 1s ease;
+  width: 200px;
+  padding: 8px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(0, 0, 0, .22);
+  color: rgba(255, 255, 255, .92);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease, background-color .15s ease;
+  font-size: 15px;
+}
+
+input:focus {
+  border-color: rgba(99, 102, 241, .55);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, .25);
+  transform: translateY(-1px);
+}
+
+.error-message {
+  color: rgb(227, 65, 65);
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

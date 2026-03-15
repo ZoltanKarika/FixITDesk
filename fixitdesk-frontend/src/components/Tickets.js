@@ -1,67 +1,122 @@
-// src/components/Tickets.js
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../css/tickets.css'
+import '../css/animations.css'
 import api from './api';
 
 import { useUserHandler } from './UserHandler';
-//talán ide is kell egy checkuser
-const Tickets = () => {
+
+const NewTickets = () => {
 
   const { user, loginHandler, logoutHandler } = useUserHandler();
-
   const [tickets, setTickets] = useState([]);
-  const [loading, setLoading] = useState(true); // To track loading state
-  const [error, setError] = useState(null); // To track error state
   const navigate = useNavigate();
 
   useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const response = await api.get('/api/accounts/whoami/');
+        if (!response.ok) {
+          logoutHandler();
+          navigate('/gatekeeper');
+          return;
+        }
+        const data = await response.json();
+        loginHandler(data);
+      } catch (error) {
+        console.error('Error checking user:', error);
+        logoutHandler();
+        navigate('/gatekeeper');
+      }
+    };
+
     const fetchTickets = async () => {
       try {
         const response = await api.get('/api/tickets/');
-
-        // Handle Unauthorized (401) response
-        if (response.status === 401) {
-          console.log('Unauthorized. Redirecting to login...');
-          navigate('/gatekeeper'); // Redirect to login if unauthorized
-          logoutHandler();
-          return;
-        }
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch tickets');
-        }
-
+        if (!response.ok) throw new Error('Failed to fetch tickets');
         const data = await response.json();
         setTickets(data);
       } catch (error) {
         console.error('Error fetching tickets:', error);
-        setError('Error fetching tickets. Please try again later.');
-      } finally {
-        setLoading(false); // Set loading to false once data is fetched
       }
     };
 
-    fetchTickets();
+    checkUser().then(fetchTickets);
   }, [navigate]);
 
-  if (loading) {
-    return <div>Loading...</div>; // Display loading message while fetching tickets
-  }
 
   return (
-    <div className='p-top enter'>
-      <div className='ticket-details-page'>
-        <h1 >Tickets</h1>
-        {error && <div style={{ color: 'red' }}>{error}</div>} {/* Show error message if any */}
-        <ul>
-          {tickets.map(ticket => (
-            <li key={ticket.id}>{ticket.title}</li>
-          ))}
-        </ul>
-      </div>
+    <div className="dashboard-page p-top">
+
+      <h1 className="page-title fade-in enter">Tickets</h1>
+
+      {user ? (
+        <div className="dashboard-panel fade-in enter">
+
+          <h1>Welcome, {user.username}!</h1>
+
+          {/*{user.is_support_staff && (
+            <button className="admin-btn">Admin Mode</button>
+          )}*/}
+
+          <h3>Open Tickets:</h3>
+
+          {tickets.length === 0 ? (
+            <p>No tickets available.</p>
+          ) : (
+            <div className="table-panel">
+              <table>
+                <thead>
+                  <tr>
+                    <td>
+                      ID
+                    </td>
+                    <td>
+                      Short Description
+                    </td>
+                    <td>
+                      State
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tickets.map(ticket => (
+                    <tr>
+                      <td>
+                        {ticket.id}
+                       {console.log(ticket)}
+                      </td>
+                      <td>
+                        {ticket.title}
+                      </td>
+                      <td>
+                        {ticket.status}
+                      </td>
+                      <td>
+                        <a href={'/tickets/' + ticket.id}>
+                          <button>View</button>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+          )}
+
+        </div>
+      ) : (
+        <p className="loading">Loading user information...</p>
+      )}
+
     </div>
   );
 };
 
-export default Tickets;
-
+export default NewTickets;

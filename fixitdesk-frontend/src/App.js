@@ -4,15 +4,16 @@ import { useState } from 'react';
 import Home from './components/Home';
 import Logout from './components/Logout';
 // import TokenExpiry from './components/TokenExpiry';
-import Tickets from './components/Tickets';
-import Dashboard from './components/Dashboard';
+import NewTickets from './components/Tickets';
+
 import SubmitTicket from './components/SubmitTicket';
 import TicketPage from './components/TicketView';
 import InnerLayout from './components/InnerLayout';
 import Rootpage from './components/Rootpage';
 import Fixer from './components/Fixer';
 import AdminUsers from "./components/AdminUsers";
-import AdminUsersSecond from './components/AdminUsersSecond';
+import Statistics from './components/Statistics';
+
 
 
 
@@ -28,12 +29,11 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/accounts/logout" element={<Logout />} /> {/* Add logout route */}
           <Route path="/fixer" element={<Fixer />} />
-          <Route path="/tickets" element={<Tickets />} />
+          <Route path="/tickets" element={<NewTickets />} />
           <Route path="/submitticket" element={<SubmitTicket />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/statistics" element={<Statistics/>} />
           <Route path="/tickets/:ticketId/" element={<TicketPage />} />
           <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/users2" element={<AdminUsersSecond />} />
         </Route>
 
       </Routes>

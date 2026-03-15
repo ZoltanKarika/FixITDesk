@@ -50,11 +50,11 @@ class AdminUserListView(generics.ListAPIView):
             raise PermissionDenied("You do not have permission to view this page.")
         return User.objects.all().order_by("id")
 
-class AdminUserUpdateView(generics.RetrieveUpdateAPIView):
+class AdminUserUpdateView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = User.objects.all()
     serializer_class = AdminUserUpdateSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         user = super().get_object()

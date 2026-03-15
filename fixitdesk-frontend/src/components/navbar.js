@@ -24,22 +24,19 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="hideOnMobile">
-            <Link to="/fixer">Mr.Fixer</Link>
+            <Link to="/tickets">Tickets</Link>
           </li>
           <li className="hideOnMobile">
-            <Link to="/tickets">Tickets</Link>
+            <Link to="/fixer">Mr.Fixer</Link>
           </li>
           <li className="hideOnMobile">
             <Link to="/submitticket">Create ticket</Link>
           </li>
           <li className="hideOnMobile">
-            <Link to="/dashboard">Dashboard-StatOrDel</Link>
+            <Link to="/statistics">Statistics</Link>
           </li>
           {user?.is_support_staff && <li className="hideOnMobile">
-            <Link to="/admin/users">User Management</Link>
-          </li>}
-           {user?.is_support_staff && <li className="hideOnMobile">
-            <Link to="/admin/users2">User Management2</Link>
+            <Link to="/admin/users">Manage Users</Link>
           </li>}
           <li className="hideOnMobile">
             <Link to="/accounts/logout">Logout</Link>
@@ -54,22 +51,19 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/fixer">Mr.Fixer</Link>
+            <Link to="/tickets">Tickets</Link>
           </li>
           <li>
-            <Link to="/tickets">Tickets</Link>
+            <Link to="/fixer">Mr.Fixer</Link>
           </li>
           <li>
             <Link to="/submitticket">Create ticket</Link>
           </li>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard">Statistics</Link>
           </li>
           {user?.is_support_staff && <li>
-            <Link to="/admin/users">User Management</Link>
-          </li>}
-          {user?.is_support_staff && <li className="hideOnMobile">
-            <Link to="/admin/users2">User Management2</Link>
+            <Link to="/admin/users">Manage Users</Link>
           </li>}
           <li>
             <Link to="/accounts/logout">Logout</Link>
