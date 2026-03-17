@@ -48,7 +48,7 @@ const SubmitTicket = () => {
 
       const data = await response.json();
       if (data && data.id) {
-        navigate('/tickets'); // Redirect to the dashboard after successful submission
+        navigate('/tickets');
       }
     } catch (error) {
       console.error('Error submitting ticket:', error);
@@ -103,9 +103,13 @@ const SubmitTicket = () => {
               onChange={(e) => setStatus(e.target.value)}
             >
               <option value="open">Open</option>
-              {/*<option value="in_progress">In Progress</option>
-              <option value="resolved">Resolved</option>
-              <option value="closed">Closed</option>*/}
+              {user?.is_support_staff && (
+                <>
+                  <option value="in_progress">In Progress</option>
+                  <option value="resolved">Resolved</option>
+                  <option value="closed">Closed</option>
+                </>
+              )}
             </select>
           </div>
           <div>
@@ -116,9 +120,12 @@ const SubmitTicket = () => {
               onChange={(e) => setPriority(e.target.value)}
             >
               <option value="low">Low</option>
-              {/*<option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="urgent">Urgent</option>*/}
+              {user?.is_support_staff && (
+                <>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                  <option value="urgent">Urgent</option>
+                </>)}
             </select>
           </div>
           <div>
@@ -129,8 +136,11 @@ const SubmitTicket = () => {
               onChange={(e) => setImpact(e.target.value)}
             >
               <option value="low">Low</option>
-              {/*<option value="medium">Medium</option>
-              <option value="high">High</option>*/}
+              {user?.is_support_staff && (
+                <>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </>)}
             </select>
           </div>
           <div>

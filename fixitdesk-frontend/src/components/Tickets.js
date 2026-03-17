@@ -48,18 +48,19 @@ const NewTickets = () => {
   return (
     <div className="dashboard-page p-top">
 
-      <h1 className="page-title fade-in enter">Tickets</h1>
+      <h1 className="page-title enter">Tickets</h1>
 
       {user ? (
-        <div className="dashboard-panel fade-in enter">
+        <div className="dashboard-panel enter">
 
-          <h1>Welcome, {user.username}!</h1>
+          {/*<h1>Welcome, {user.username}!</h1>*/}
+          <h1>Open tickets: </h1>
 
           {/*{user.is_support_staff && (
             <button className="admin-btn">Admin Mode</button>
           )}*/}
 
-          <h3>Open Tickets:</h3>
+          {/*<h3>Open Tickets:</h3>*/}
 
           {tickets.length === 0 ? (
             <p>No tickets available.</p>
@@ -95,7 +96,7 @@ const NewTickets = () => {
                       <td>
                         {ticket.title}
                       </td>
-                      <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : 'green'}>
+                      <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : ticket.status === 'resolved' ? 'green': 'grey'}>
                         {ticket.status}
                       </td>
                       <td>

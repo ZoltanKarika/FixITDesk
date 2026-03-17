@@ -38,6 +38,13 @@ h2 {
 
 }
 
+
+
+.content-layer {
+  position: relative;
+  z-index: 10;
+}
+
 .box div:nth-child(1) {
   top: 12%;
   left: 42%;

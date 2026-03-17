@@ -55,7 +55,8 @@ const Rootpage = () => {
     } catch (loginError) {
       console.error(loginError);
       setLoginError("Error logging in");
-   
+      setLoginFormData({ username: "", password: "" });
+
     }
   };
 
@@ -74,8 +75,21 @@ const Rootpage = () => {
       }
       const data = await response.json();
       console.log("User registered:", data);
-      navigate('/gatekeeper')
+      setRegFormData({
+        username: "",
+        email: "",
+        password: "",
+        department: "",
+        is_support_staff: false,
+      });
     } catch (regError) {
+      setRegFormData({
+        username: "",
+        email: "",
+        password: "",
+        department: "",
+        is_support_staff: false,
+      });
       setRegError("Error registering user");
     }
   };
@@ -87,7 +101,6 @@ const Rootpage = () => {
           <div className="form-cont log-in-cont">
             <form onSubmit={handleLoginSubmit}>
               <h1>Login</h1>
-              {loginError && <p style={{ color: "red" }} className="form-cont">{loginError}</p>}
               <label>
                 Username:
                 <input
@@ -108,7 +121,9 @@ const Rootpage = () => {
                 />
               </label>
               <br />
+              {loginError && <div style={{ color: "red" }}>{loginError}</div>}
               <button type="submit">Login</button>
+
             </form>
           </div>
           <div className="form-cont reg-cont">
@@ -146,19 +161,10 @@ const Rootpage = () => {
                 onChange={handleRegChange}
                 required
               />
-              {/*<label>Support Staff:</label>
-              <input
-                type="checkbox"
-                name="is_support_staff"
-                checked={regFormData.is_support_staff}
-                onChange={() =>
-                  setRegFormData({ ...regFormData, is_support_staff: !regFormData.is_support_staff })
-                }
-              />*/}
+              {regError && <div style={{ color: "red" }}>{regError}</div>}
               <button type="submit">Register</button>
             </form>
 
-            {regError && <p>{regError}</p>}
           </div>
 
           <div className="overlay-container">

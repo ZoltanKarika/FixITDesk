@@ -48,26 +48,26 @@ const NavBar = () => {
         <ul className="sidebar">
           <li onClick={hideSidebar} ><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="45px" fill="#1f1f1f"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></li>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">🏠Home</Link>
           </li>
           <li>
-            <Link to="/tickets">Tickets</Link>
+            <Link to="/tickets">🎫 Tickets</Link>
           </li>
           <li>
-            <Link to="/fixer">Mr.Fixer</Link>
+            <Link to="/fixer">🤖 Mr.Fixer</Link>
           </li>
        
             <li>
-              <Link to="/submitticket">Create ticket</Link>   {!user?.is_support_staff &&""}
+              <Link to="/submitticket">➕ Create ticket</Link>   {!user?.is_support_staff &&""}
             </li>
           <li>
-            <Link to="/statistics">Statistics</Link>
+            <Link to="/statistics">📊 Statistics</Link>
           </li>
           {user?.is_support_staff && <li>
-            <Link to="/admin/users">Manage Users</Link>
+            <Link to="/admin/users">🙍‍♀️🙍‍♂️Manage Users</Link>
           </li>}
           <li>
-            <Link to="/accounts/logout">Logout</Link>
+            <Link to="/accounts/logout">➡️🚪Logout</Link>
           </li>
         </ul>
       </nav>

@@ -130,7 +130,7 @@
   font-weight: bold;
 }
 
-.blue  {
+.blue {
   color: rgb(28, 194, 227);
   box-shadow: none;
   font-weight: bold;
@@ -138,6 +138,12 @@
 
 .green {
   color: rgb(16, 236, 16);
+  box-shadow: none;
+  font-weight: bold;
+}
+
+.grey {
+  color: grey;
   box-shadow: none;
   font-weight: bold;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from './api';
 import '../css/statistics.css';
+import '../css/animations.css';
 import {
     PieChart, Pie, Cell, Tooltip, Legend,
     BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer
@@ -68,7 +69,7 @@ const Statistics = () => {
     };
  
     return (
-        <div className='stat-wrap p-top'>
+        <div className='stat-wrap p-top enter'>
             <h1 className='stat-title'>Statistics</h1>
  
             {/* Overview kártyák */}

@@ -98,7 +98,7 @@ const AdminUsersSecond = () => {
     if (!user) return <p>Loading user info...</p>;
 
     return (
-        <div className='p-top fade-in enter admin-wrap'>
+        <div className='p-top enter admin-wrap'>
             <div className='admin-main'>
                 <h1 className='admin-title'>Admin User Management</h1>
                 <div className='admin-user-wrapper'>

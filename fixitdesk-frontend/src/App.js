@@ -1,9 +1,7 @@
 
-import { Routes, Route } from 'react-router-dom'; // Removed React import from here
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Logout from './components/Logout';
-// import TokenExpiry from './components/TokenExpiry';
 import NewTickets from './components/Tickets';
 
 import SubmitTicket from './components/SubmitTicket';
@@ -22,12 +20,11 @@ const App = () => {
   return (
     <div className='whole-app'>
 
-      {/*<TokenExpiry />*/}
       <Routes>
         <Route path="/gatekeeper" element={<Rootpage />} />
         <Route element={<InnerLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/accounts/logout" element={<Logout />} /> {/* Add logout route */}
+          <Route path="/accounts/logout" element={<Logout />} />
           <Route path="/fixer" element={<Fixer />} />
           <Route path="/tickets" element={<NewTickets />} />
           <Route path="/submitticket" element={<SubmitTicket />} />

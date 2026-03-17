@@ -25,20 +25,21 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 18px;
+
 }
 
 .home-card {
     position: relative;
     z-index: 20;
-    background: rgba(255, 255, 255, .08);
     border: 1px solid rgba(255, 255, 255, .14);
     border-radius: 16px;
     padding: 26px 26px;
     box-shadow: 0 14px 50px rgba(0, 0, 0, .35);
-    backdrop-filter: blur(20px);
     cursor: pointer;
     transition: transform .15s ease, filter .15s ease, background .15s ease;
     animation: enter .4s cubic-bezier(.2, .8, .2, 1) both;
+    background: rgba(255, 255, 255, .06)!important;
+    
 }
 
 .home-card:hover {

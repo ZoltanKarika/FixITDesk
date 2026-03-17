@@ -21,7 +21,7 @@ p {
   position: relative;
   width: 900px;
   max-width: 95vw;
-  min-height: 520px;
+  min-height: 600px;
   margin: 40px auto;
   border-radius: 16px;
   overflow: hidden;
@@ -37,7 +37,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 1.2s ease-in-out, opacity 1s ease-in-out;{/*Ezen változtatni a fade "hangolásához"*/}
+  transition: transform 1.2s ease-in-out, opacity 1s ease-in-out;
 }
 
 .form-cont form {
@@ -56,7 +56,7 @@ p {
   padding: 12px 14px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   outline: none;
-
+  color: black;
 
   border: none;
   outline: none;
@@ -128,6 +128,10 @@ p {
       rgb(83, 83, 198),
       rgb(18, 3, 182));
   color: #ffffff;
+}
+
+input {
+  pointer-events: all;
 }
 
 .overlay-panel {

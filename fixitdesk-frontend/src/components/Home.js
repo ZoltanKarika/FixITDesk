@@ -6,11 +6,11 @@ import api from './api';
 import { useUserHandler } from './UserHandler';
 import '../css/home.css';
 import '../css/animations.css';
- 
+
 const Home = () => {
   const { user, loginHandler, logoutHandler } = useUserHandler();
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     const checkUser = async () => {
       try {
@@ -30,7 +30,7 @@ const Home = () => {
     };
     checkUser();
   }, [navigate]);
- 
+
   const cards = [
     {
       icon: '🎫',
@@ -61,17 +61,22 @@ const Home = () => {
       path: '/statistics',
     },
     ...(user?.is_support_staff ? [{
-      icon: '👥',
+      icon: '🙍‍♀️🙍‍♂️',
       title: 'Manage Users',
       desc: "Manage and modify user details.",
       path: '/admin/users',
-    }] : []),
+    }] : []), {
+      icon: '➡️🚪',
+      title: 'Logout',
+      desc: 'Goodbye!',
+      path: '/accounts/logout',
+    }
   ];
- 
+
   return (
     <div className='p-top enter home-wrap'>
       <div className='home-welcome'>
-        <h1>Welcome {user ? user.username : 'Guest'}!</h1>
+        <h1>Welcome, {user ? user.username : 'Guest'}!</h1>
         <p>This is the homepage of the FixIT ticket management. Check the instructions below!</p>
       </div>
       <div className='home-cards'>
@@ -86,6 +91,6 @@ const Home = () => {
     </div>
   );
 };
- 
+
 export default Home;
 

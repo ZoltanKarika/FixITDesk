@@ -211,8 +211,10 @@ const TicketNotesAndDetailsPage = () => {
           <h3>Notes</h3>
           <ul>
             {notes.map(note => (
+              
               (note.note_type !== 'work_note' || userInfo.is_support_staff) && (
                 <li key={note.id}>
+                  {console.log("admin írta?:" + note.id +" " + userInfo.is_support_staff)}
                   <div>
                     <strong>{note.user}</strong> <em>({note.note_type.replace('_', ' ')})</em><br />
                     {editingNoteId === note.id ? (
