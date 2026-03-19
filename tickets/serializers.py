@@ -13,8 +13,11 @@ class NoteSerializer(serializers.ModelSerializer):
     # Optionally, you can include user and ticket information in the response
     user = serializers.StringRelatedField(read_only=True)  # Shows the username of the user who created the note
     ticket = serializers.StringRelatedField(read_only=True)  # Shows the title of the related ticket
-    
+    #is_support_staff = serializers.SerializerMethodField()
     class Meta:
         model = Note
         fields = ['id', 'ticket', 'user', 'content', 'note_type', 'created_at']
         read_only_fields = ['id', 'created_at', 'user', 'ticket']
+        #fields -> 'is_support_staff'
+
+

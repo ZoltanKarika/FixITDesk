@@ -136,6 +136,7 @@
   margin: 0;
   display: grid;
   gap: 12px;
+
 }
 
 .ticket-details-page li{
@@ -161,12 +162,12 @@
   color: rgba(255,255,255,.58);
 }
 
-/* Note content spacing */
+
 .ticket-details-page li br{
   line-height: 1.4;
 }
 
-/* ===== Enter animation (csak itt) ===== */
+
 @media (prefers-reduced-motion: no-preference){
   .ticket-details-page.enter{
     animation: ticketEnter .4s cubic-bezier(.2,.8,.2,1) both;

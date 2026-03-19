@@ -137,15 +137,19 @@ input:focus {
   font-size: 18px;
 }
 
+.check-admin {
+  cursor: 'pointer';
+  font-size: '1.2rem';
+  display: inline-block;
+  transition: transform 0.5s;
+  background-color: transparent;
+}
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
+.check-admin:hover {
+  transform: scale(1.8);
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.own-row {
+    opacity: 0.5;
+    cursor:not-allowed !important;
 }

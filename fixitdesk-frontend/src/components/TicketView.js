@@ -162,26 +162,26 @@ const TicketNotesAndDetailsPage = () => {
           </div>
         ) : (
           <form onSubmit={handleTicketUpdate}>
-            <input type="text" value={editTicketData.title} onChange={(e) => setEditTicketData({ ...editTicketData, title: e.target.value })} required />
-            <textarea value={editTicketData.description} onChange={(e) => setEditTicketData({ ...editTicketData, description: e.target.value })} required />
-            <select value={editTicketData.status} onChange={(e) => setEditTicketData({ ...editTicketData, status: e.target.value })}>
+            Title: <input type="text" value={editTicketData.title} onChange={(e) => setEditTicketData({ ...editTicketData, title: e.target.value })} required />
+            Description: <textarea value={editTicketData.description} onChange={(e) => setEditTicketData({ ...editTicketData, description: e.target.value })} required />
+            Status: <select value={editTicketData.status} onChange={(e) => setEditTicketData({ ...editTicketData, status: e.target.value })}>
               <option value="open">Open</option>
               <option value="in_progress">In Progress</option>
               <option value="resolved">Resolved</option>
               <option value="closed">Closed</option>
             </select>
-            <select value={editTicketData.priority} onChange={(e) => setEditTicketData({ ...editTicketData, priority: e.target.value })}>
+            Priority: <select value={editTicketData.priority} onChange={(e) => setEditTicketData({ ...editTicketData, priority: e.target.value })}>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
               <option value="urgent">Urgent</option>
             </select>
-            <select value={editTicketData.impact} onChange={(e) => setEditTicketData({ ...editTicketData, impact: e.target.value })}>
+            Impact: <select value={editTicketData.impact} onChange={(e) => setEditTicketData({ ...editTicketData, impact: e.target.value })}>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            <input type="text" value={editTicketData.department} onChange={(e) => setEditTicketData({ ...editTicketData, department: e.target.value })} required />
+            Department: <input type="text" value={editTicketData.department} onChange={(e) => setEditTicketData({ ...editTicketData, department: e.target.value })} required />
             <button type="submit">Save</button>
             <button type="button" onClick={() => setTicketEditing(false)}>Cancel</button>
           </form>
@@ -211,12 +211,12 @@ const TicketNotesAndDetailsPage = () => {
           <h3>Notes</h3>
           <ul>
             {notes.map(note => (
-              
               (note.note_type !== 'work_note' || userInfo.is_support_staff) && (
-                <li key={note.id}>
-                  {console.log("admin írta?:" + note.id +" " + userInfo.is_support_staff)}
+                <li key={note.id} className={''}>
+                  {console.log(note)}
+                  {console.log(user.is_support_staff)}
                   <div>
-                    <strong>{note.user}</strong> <em>({note.note_type.replace('_', ' ')})</em><br />
+                    <strong>{note.user}</strong> <em>({note.note_type.replace('_', ' ')}){note.note_type == 'work_note' && '🔧'}</em><br />
                     {editingNoteId === note.id ? (
                       <>
                         <textarea

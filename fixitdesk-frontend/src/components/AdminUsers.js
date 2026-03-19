@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from './api';
 import '../css/adminuser.css';
+import '../css/animations.css';
 import { useUserHandler } from './UserHandler';
 
 const AdminUsersSecond = () => {
@@ -45,6 +46,7 @@ const AdminUsersSecond = () => {
 
     const handleRowClick = (u) => {
         if (editingId === u.id) return;
+        //if (u.username === user.username) return;
         setEditingId(u.id);
         setEditForm({
             username: u.username,
@@ -147,12 +149,19 @@ const AdminUsersSecond = () => {
                                                 />
                                             </td>
                                             <td>
-                                                <input
-                                                    type="checkbox"
-                                                    name="is_support_staff"
-                                                    checked={editForm.is_support_staff}
-                                                    onChange={handleChange}
-                                                />
+                                                <span
+
+                                                    className='check-admin zoomer'
+                                                 
+                                                    onClick={() =>
+                                                        setEditForm(prev => ({
+                                                            ...prev,
+                                                            is_support_staff: !prev.is_support_staff,
+                                                        }))
+                                                    }
+                                                >
+                                                    {editForm.is_support_staff ? '✔️' : '❌'}
+                                                </span>
                                             </td>
                                             <td className='action-buttons'>
                                                 <button onClick={() => handleSave(u.id)} className='btn-save'>Save</button>
@@ -161,7 +170,7 @@ const AdminUsersSecond = () => {
                                             </td>
                                         </tr>
                                     ) : (
-                                        <tr key={u.id} onClick={() => handleRowClick(u)} className='clickable-row'>
+                                        <tr key={u.id} onClick={() => handleRowClick(u)}  className={`clickable-row ${u.username === user.username ? 'own-row' : ''}`}>
                                             <td>{u.id}</td>
                                             <td>{u.username}</td>
                                             <td>{u.email}</td>
@@ -169,6 +178,7 @@ const AdminUsersSecond = () => {
                                             <td>{u.is_support_staff ? '✔️' : '❌'}</td>
                                             <td></td>
                                         </tr>
+                                        //classname tr-ben nem optimális id kellene, whoamiview-ban
                                     )
                                 ))}
                             </tbody>
