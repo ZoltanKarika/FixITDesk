@@ -60,6 +60,7 @@ const SubmitTicket = () => {
     <div className='ticket-page p-top'>
       <div className='main-c enter ticket-panel'>
         <h1>Submit a Ticket</h1>
+        <label className='user-dep-line'>{user.username} <p>{user.department}</p></label>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div>

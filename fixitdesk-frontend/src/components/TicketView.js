@@ -5,13 +5,6 @@ import '../css/ticketview.css';
 
 import { useUserHandler } from './UserHandler';
 
-
-function getCookie(name) {
-  const cookieValue = document.cookie.split('; ').find(row => row.startsWith(name + '='));
-  console.log("getCookie is hit: ", cookieValue)
-  return cookieValue ? decodeURIComponent(cookieValue.split('=')[1]) : null;
-}
-
 const TicketNotesAndDetailsPage = () => {
 
   const { user, loginHandler, logoutHandler } = useUserHandler();
@@ -161,9 +154,9 @@ const TicketNotesAndDetailsPage = () => {
       <div className='ticket-details-page'>
         <h1>Ticket #{ticketId}</h1>
 
-        {/* Ticket Details */}
         {!ticketEditing ? (
           <div>
+            <p>User: {ticket.username}</p>
             <p><strong>Title:</strong> {ticket.title}</p>
             <p><strong>Description:</strong> {ticket.description}</p>
             <p><strong>Status:</strong> {ticket.status}</p>
@@ -233,8 +226,6 @@ const TicketNotesAndDetailsPage = () => {
             {notes.map(note => (
               (note.note_type !== 'work_note' || userInfo.is_support_staff) && (
                 <li key={note.id} className={`note-bubble ${note.is_support_staff ? 'note-admin' : 'note-customer'}`}>
-                  {console.log(note)}
-                  {console.log(user.is_support_staff)}
                   <div>
                     <strong>{note.user}</strong> <em>({note.note_type.replace('_', ' ')}){note.note_type == 'work_note' && '🔧🛠️🪛'}</em><br />
                     {editingNoteId === note.id ? (
