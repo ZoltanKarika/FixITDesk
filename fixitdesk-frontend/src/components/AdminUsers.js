@@ -132,7 +132,8 @@ const AdminUsersSecond = () => {
                                     .filter(u =>
                                         u.username?.toLowerCase().includes(search.toLowerCase()) ||
                                         u.email?.toLowerCase().includes(search.toLowerCase()) ||
-                                        u.department?.toLowerCase().includes(search.toLowerCase())
+                                        u.department?.toLowerCase().includes(search.toLowerCase()) ||
+                                        String(u.id)?.includes(search)
                                     )
                                     .map(u => (
                                         editingId === u.id ? (

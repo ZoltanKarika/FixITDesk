@@ -59,14 +59,7 @@ const NewTickets = () => {
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
-          {/*<h1>Welcome, {user.username}!</h1>*/}
           <h1>Open tickets: </h1>
-
-          {/*{user.is_support_staff && (
-            <button className="admin-btn">Admin Mode</button>
-          )}*/}
-
-          {/*<h3>Open Tickets:</h3>*/}
 
           {tickets.length === 0 ? (
             <p>No tickets available.</p>
