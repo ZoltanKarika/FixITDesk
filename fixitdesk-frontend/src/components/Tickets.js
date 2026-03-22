@@ -10,6 +10,7 @@ const NewTickets = () => {
 
   const { user, loginHandler, logoutHandler } = useUserHandler();
   const [tickets, setTickets] = useState([]);
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,7 +53,12 @@ const NewTickets = () => {
 
       {user ? (
         <div className="dashboard-panel enter">
-
+          <input
+            className="search-input"
+            placeholder="🔍 Search tickets..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
           {/*<h1>Welcome, {user.username}!</h1>*/}
           <h1>Open tickets: </h1>
 
@@ -84,7 +90,12 @@ const NewTickets = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {tickets.map(ticket => (
+                  {tickets.filter(t =>
+                    t.title?.toLowerCase().includes(search.toLowerCase()) ||
+                    t.username?.toLowerCase().includes(search.toLowerCase())||
+                    t.status?.toLowerCase().includes(search.toLowerCase())||
+                     String(t.id)?.includes(search)
+                  ).map(ticket => (
                     <tr>
                       <td>
                         {ticket.id}
@@ -96,7 +107,7 @@ const NewTickets = () => {
                       <td>
                         {ticket.title}
                       </td>
-                      <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : ticket.status === 'resolved' ? 'green': 'grey'}>
+                      <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : ticket.status === 'resolved' ? 'green' : 'grey'}>
                         {ticket.status}
                       </td>
                       <td>

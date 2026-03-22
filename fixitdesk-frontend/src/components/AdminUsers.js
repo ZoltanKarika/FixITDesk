@@ -12,6 +12,7 @@ const AdminUsersSecond = () => {
     const [editingId, setEditingId] = useState(null);
     const [editForm, setEditForm] = useState({});
     const [saveError, setSaveError] = useState(null);
+    const [search, setSearch] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -104,6 +105,13 @@ const AdminUsersSecond = () => {
             <div className='admin-main'>
                 <h1 className='admin-title'>Admin User Management</h1>
                 <div className='admin-user-wrapper'>
+                    <input
+                        className="search-input"
+                        placeholder="🔍 Search users..."
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        style={{ width: '100%', marginBottom: '12px', boxSizing: 'border-box' }}
+                    />
                     <h1>Users</h1>
                     {saveError && <p style={{ color: 'red' }}>{saveError}</p>}
                     <p className='admin-hint'>Click on a line to modify. <span className="error-message">Own account can not be modified!</span></p>
@@ -120,67 +128,73 @@ const AdminUsersSecond = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {Array.isArray(users) && users.map(u => (
-                                    editingId === u.id ? (
-                                        <tr key={u.id} className='editing-row'>
-                                            <td>{u.id}</td>
-                                            <td>
-                                                <input
-                                                    name="username"
-                                                    value={editForm.username}
-                                                    onChange={handleChange}
-                                                    className='admin-input'
-                                                />
-                                            </td>
-                                            <td>
-                                                <input
-                                                    name="email"
-                                                    value={editForm.email}
-                                                    onChange={handleChange}
-                                                    className='admin-input'
-                                                />
-                                            </td>
-                                            <td>
-                                                <input
-                                                    name="department"
-                                                    value={editForm.department}
-                                                    onChange={handleChange}
-                                                    className='admin-input'
-                                                />
-                                            </td>
-                                            <td>
-                                                <span
-
-                                                    className='check-admin zoomer'
-                                                 
-                                                    onClick={() =>
-                                                        setEditForm(prev => ({
-                                                            ...prev,
-                                                            is_support_staff: !prev.is_support_staff,
-                                                        }))
-                                                    }
-                                                >
-                                                    {editForm.is_support_staff ? '✔️' : '❌'}
-                                                </span>
-                                            </td>
-                                            <td className='action-buttons'>
-                                                <button onClick={() => handleSave(u.id)} className='btn-save'>Save</button>
-                                                <button onClick={handleCancel} className='btn-cancel'>Cancel</button>
-                                                <button onClick={() => handleDelete(u.id)} className='btn-delete'>Delete</button>
-                                            </td>
-                                        </tr>
-                                    ) : (
-                                        <tr key={u.id} onClick={() => handleRowClick(u)}  className={`clickable-row ${u.username === user.username ? 'own-row' : ''}`}>
-                                            <td>{u.id}</td>
-                                            <td>{u.username}</td>
-                                            <td>{u.email}</td>
-                                            <td>{u.department}</td>
-                                            <td>{u.is_support_staff ? '✔️' : '❌'}</td>
-                                            <td></td>
-                                        </tr>
-                                        //classname tr-ben nem optimális id kellene, whoamiview-ban
+                                {Array.isArray(users) && users
+                                    .filter(u =>
+                                        u.username?.toLowerCase().includes(search.toLowerCase()) ||
+                                        u.email?.toLowerCase().includes(search.toLowerCase()) ||
+                                        u.department?.toLowerCase().includes(search.toLowerCase())
                                     )
-                                ))}
+                                    .map(u => (
+                                        editingId === u.id ? (
+                                            <tr key={u.id} className='editing-row'>
+                                                <td>{u.id}</td>
+                                                <td>
+                                                    <input
+                                                        name="username"
+                                                        value={editForm.username}
+                                                        onChange={handleChange}
+                                                        className='admin-input'
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        name="email"
+                                                        value={editForm.email}
+                                                        onChange={handleChange}
+                                                        className='admin-input'
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <input
+                                                        name="department"
+                                                        value={editForm.department}
+                                                        onChange={handleChange}
+                                                        className='admin-input'
+                                                    />
+                                                </td>
+                                                <td>
+                                                    <span
+
+                                                        className='check-admin zoomer'
+
+                                                        onClick={() =>
+                                                            setEditForm(prev => ({
+                                                                ...prev,
+                                                                is_support_staff: !prev.is_support_staff,
+                                                            }))
+                                                        }
+                                                    >
+                                                        {editForm.is_support_staff ? '✔️' : '❌'}
+                                                    </span>
+                                                </td>
+                                                <td className='action-buttons'>
+                                                    <button onClick={() => handleSave(u.id)} className='btn-save'>Save</button>
+                                                    <button onClick={handleCancel} className='btn-cancel'>Cancel</button>
+                                                    <button onClick={() => handleDelete(u.id)} className='btn-delete'>Delete</button>
+                                                </td>
+                                            </tr>
+                                        ) : (
+                                            <tr key={u.id} onClick={() => handleRowClick(u)} className={`clickable-row ${u.username === user.username ? 'own-row' : ''}`}>
+                                                <td>{u.id}</td>
+                                                <td>{u.username}</td>
+                                                <td>{u.email}</td>
+                                                <td>{u.department}</td>
+                                                <td>{u.is_support_staff ? '✔️' : '❌'}</td>
+                                                <td></td>
+                                            </tr>
+                                            //classname tr-ben nem optimális id kellene, whoamiview-ban
+                                        )
+                                    ))}
                             </tbody>
                         </table>
                     </div>
