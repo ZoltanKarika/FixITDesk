@@ -5,11 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  width: 100%;
-  min-width: 600px !important;
-
-
+  
 
 }
 
@@ -38,7 +34,7 @@ code {
   border: none;
   padding: 1rem;
   font-size: 1rem;
-  /*width: 13rem;*/
+  width: 13rem;
   border-radius: 1rem;
   color: rgb(25, 17, 177);
   box-shadow: 0 0.4rem #087aae;
