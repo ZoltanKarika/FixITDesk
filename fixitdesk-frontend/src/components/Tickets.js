@@ -8,9 +8,10 @@ import { useUserHandler } from './UserHandler';
 
 const NewTickets = () => {
 
-  const { user, loginHandler, logoutHandler } = useUserHandler();
+  const { user, loginHandler, logoutHandler, updateUnreadCount } = useUserHandler();
   const [tickets, setTickets] = useState([]);
   const [search, setSearch] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,13 +31,15 @@ const NewTickets = () => {
         navigate('/gatekeeper');
       }
     };
-
     const fetchTickets = async () => {
       try {
         const response = await api.get('/api/tickets/');
         if (!response.ok) throw new Error('Failed to fetch tickets');
         const data = await response.json();
         setTickets(data);
+        const total = data.reduce((sum, t) => sum + (t.unread_count || 0), 0);
+        updateUnreadCount(total);
+
       } catch (error) {
         console.error('Error fetching tickets:', error);
       }
@@ -44,6 +47,26 @@ const NewTickets = () => {
 
     checkUser().then(fetchTickets);
   }, [navigate]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   return (
@@ -85,9 +108,9 @@ const NewTickets = () => {
                 <tbody>
                   {tickets.filter(t =>
                     t.title?.toLowerCase().includes(search.toLowerCase()) ||
-                    t.username?.toLowerCase().includes(search.toLowerCase())||
-                    t.status?.toLowerCase().includes(search.toLowerCase())||
-                     String(t.id)?.includes(search)
+                    t.username?.toLowerCase().includes(search.toLowerCase()) ||
+                    t.status?.toLowerCase().includes(search.toLowerCase()) ||
+                    String(t.id)?.includes(search)
                   ).map(ticket => (
                     <tr>
                       <td>
@@ -99,6 +122,7 @@ const NewTickets = () => {
                       </td>
                       <td>
                         {ticket.title}
+                        {ticket.unread_count > 0 && <span className="unread-dot"></span>}
                       </td>
                       <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : ticket.status === 'resolved' ? 'green' : 'grey'}>
                         {ticket.status}

@@ -86,6 +86,8 @@ class Note(models.Model):
         choices=NOTE_TYPE_CHOICES, 
         default=WORK_NOTE,
     )
+    is_read = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -6,7 +6,7 @@ import { useUserHandler } from "./UserHandler";
 
 
 const NavBar = () => {
-  const { user, loginHandler, logoutHandler } = useUserHandler();
+  const { user, loginHandler, logoutHandler, unreadCount } = useUserHandler();
   function showSidebar() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.style.display = 'flex';
@@ -24,7 +24,7 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="hideOnMobile">
-            <Link to="/tickets">Tickets</Link>
+            <Link to="/tickets">Tickets {unreadCount > 0 && <span className="nav-badge">{unreadCount}</span>}</Link>
           </li>
           <li className="hideOnMobile">
             <Link to="/fixer">Mr.Fixer</Link>
@@ -51,15 +51,15 @@ const NavBar = () => {
             <Link to="/">🏠Home</Link>
           </li>
           <li>
-            <Link to="/tickets">🎫 Tickets</Link>
+            <Link to="/tickets">🎫 Tickets {unreadCount > 0 && <span className="nav-badge">{unreadCount}</span>}</Link>
           </li>
           <li>
-            <Link to="/fixer">🤖 Mr.Fixer</Link>
+            <Link to="/fixer">🤖 Mr.Fixer </Link>
           </li>
-       
-            <li>
-              <Link to="/submitticket">➕ Create ticket</Link>   {!user?.is_support_staff &&""}
-            </li>
+
+          <li>
+            <Link to="/submitticket">➕ Create ticket</Link>   {!user?.is_support_staff && ""}
+          </li>
           <li>
             <Link to="/statistics">📊 Statistics</Link>
           </li>

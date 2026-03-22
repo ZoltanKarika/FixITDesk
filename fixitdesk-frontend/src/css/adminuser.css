@@ -117,7 +117,7 @@
 input {
   transition: all 1s ease;
   animation: fadeIn 1s ease;
-  width: 200px;
+  width: 180px;
   padding: 8px 8px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, .14);
@@ -156,12 +156,15 @@ input:focus {
     opacity: 0.5;
     cursor:not-allowed !important;
 }
-
+.gap{
+  display:flex;
+  gap:6px;
+}
 
 
 /*Search*/
 .search-input {
-  width: 100%;
+  width: 90%;
   margin-bottom: 14px;
   padding: 10px 14px;
   border-radius: 12px;

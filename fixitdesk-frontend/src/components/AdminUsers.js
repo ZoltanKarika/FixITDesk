@@ -178,7 +178,7 @@ const AdminUsersSecond = () => {
                                                         {editForm.is_support_staff ? '✔️' : '❌'}
                                                     </span>
                                                 </td>
-                                                <td className='action-buttons'>
+                                                <td className='action-buttons gap'>
                                                     <button onClick={() => handleSave(u.id)} className='btn-save'>Save</button>
                                                     <button onClick={handleCancel} className='btn-cancel'>Cancel</button>
                                                     <button onClick={() => handleDelete(u.id)} className='btn-delete'>Delete</button>

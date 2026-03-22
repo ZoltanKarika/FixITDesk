@@ -3,7 +3,8 @@ from .models import Ticket, Note
 from .serializers import TicketSerializer, NoteSerializer
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
 
 class IsSupportStaffOrOwner(permissions.BasePermission):
     """
@@ -87,6 +88,20 @@ class NoteRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
         return note
     
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def mark_notes_read(request, ticket_id):
+    ticket = Ticket.objects.get(id=ticket_id)
+    if ticket.user != request.user and not request.user.is_support_staff:
+        return Response({'error': 'Permission denied'}, status=403)
+    
+    Note.objects.filter(
+        ticket_id=ticket_id
+    ).exclude(
+        user=request.user
+    ).update(is_read=True)
+    return Response({'status': 'ok'})
+#Notification api
 
 
 

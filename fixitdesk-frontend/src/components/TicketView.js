@@ -54,7 +54,7 @@ const TicketNotesAndDetailsPage = () => {
 
 
 
-  // Fetch ticket and notes
+  // Fetch ticket and notes + read ticket
   useEffect(() => {
     const fetchTicketAndNotes = async () => {
       try {
@@ -67,6 +67,8 @@ const TicketNotesAndDetailsPage = () => {
           setTicket(ticketData);
           setEditTicketData(ticketData);
           setNotes(notesData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))); // Reverse chronological
+
+          await api.post(`/api/tickets/${ticketId}/notes/read/`);
         } else {
           console.error('Failed to fetch ticket or notes');
         }
