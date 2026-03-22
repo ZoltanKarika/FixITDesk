@@ -156,9 +156,9 @@
   margin-bottom: 14px;
   padding: 10px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(0,0,0,.22);
-  color: rgba(255,255,255,.92);
+  border: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(0, 0, 0, .22);
+  color: rgba(255, 255, 255, .92);
   outline: none;
   font-size: 15px;
   box-sizing: border-box;
@@ -171,12 +171,10 @@
 
 
 /*Notification*/
-.unread-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #f87171;
-  margin-left: 8px;
-  vertical-align: middle;
+.marked-tr {
+  background: rgba(255, 0, 0, 0.3);
+}
+
+.message {
+  font-size: 20px;
 }

@@ -94,7 +94,7 @@ const NewTickets = () => {
                     t.status?.toLowerCase().includes(search.toLowerCase()) ||
                     String(t.id)?.includes(search)
                   ).map(ticket => (
-                    <tr>
+                    <tr className={ticket.unread_count > 0 ? 'marked-tr' : ''}>
                       <td>
                         {ticket.id}
                       </td>
@@ -103,7 +103,7 @@ const NewTickets = () => {
                       </td>
                       <td>
                         {ticket.title}
-                        {ticket.unread_count > 0 && <span className="unread-dot"></span>}
+                        {ticket.unread_count > 0 && <span className='message'> ✉️ </span>}
                       </td>
                       <td>
                         {ticket.department}

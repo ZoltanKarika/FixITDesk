@@ -7,7 +7,7 @@ import { useUserHandler } from './UserHandler';
 
 const TicketNotesAndDetailsPage = () => {
 
-  const { user, loginHandler, logoutHandler } = useUserHandler();
+  const { user, loginHandler, logoutHandler, refreshUnreadCount } = useUserHandler();
   const { ticketId } = useParams();
   const navigate = useNavigate();
 
@@ -62,6 +62,7 @@ const TicketNotesAndDetailsPage = () => {
           setNotes(notesData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))); // Reverse chronological
 
           await api.post(`/api/tickets/${ticketId}/notes/read/`);
+          refreshUnreadCount();
         } else {
           console.error('Failed to fetch ticket or notes');
         }

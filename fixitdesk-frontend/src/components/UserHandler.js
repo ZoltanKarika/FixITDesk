@@ -13,26 +13,26 @@ export const UserProvider = ({ children }) => {
         }
     });
 
+
     useEffect(() => {
         if (user) {
-            const fetchUnread = async () => {
-                try {
-                    const res = await api.get('/api/tickets/');
-                    if (res.ok) {
-                        const data = await res.json();
-                        const total = data.reduce((sum, t) => sum + (t.unread_count || 0), 0);
-                        setUnreadCount(total);
-                    }
-                } catch (err) {
-                    console.error(err);
-                }
-            };
-            fetchUnread();
+            refreshUnreadCount();
         }
     }, [user]);
 
-    const updateUnreadCount = (count) => {
-        setUnreadCount(count);
+
+    const refreshUnreadCount = async () => {
+        if (!user) return;
+        try {
+            const res = await api.get('/api/tickets/');
+            if (res.ok) {
+                const data = await res.json();
+                const total = data.reduce((sum, t) => sum + (t.unread_count || 0), 0);
+                setUnreadCount(total);
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const loginHandler = (userData) => {
@@ -47,7 +47,7 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser, loginHandler, logoutHandler, unreadCount, updateUnreadCount }}>
+        <UserContext.Provider value={{ user, setUser, loginHandler, logoutHandler, unreadCount, refreshUnreadCount }}>
             {children}
         </UserContext.Provider>
     );
