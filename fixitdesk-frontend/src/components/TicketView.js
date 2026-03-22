@@ -139,7 +139,19 @@ const TicketNotesAndDetailsPage = () => {
       console.error('Error deleting note:', error);
     }
   };
-
+  const handleDeleteTicket = async () => {
+    if (!window.confirm('Are you sure you want to delete this ticket?')) return;
+    try {
+      const response = await api.delete(`/api/tickets/${ticketId}/`);
+      if (response.ok) {
+        navigate('/tickets');
+      } else {
+        console.error('Failed to delete ticket');
+      }
+    } catch (error) {
+      console.error('Error deleting ticket:', error);
+    }
+  };
   if (!ticket || !userInfo) return <div>Loading...</div>;
 
   return (
@@ -157,31 +169,34 @@ const TicketNotesAndDetailsPage = () => {
             <p><strong>Impact:</strong> {ticket.impact}</p>
             <p><strong>Department:</strong> {ticket.department}</p>
             {userInfo.is_support_staff && (
-              <button onClick={() => setTicketEditing(true)}>Edit Ticket</button>
+              <div className='gap'>
+                <button onClick={() => setTicketEditing(true)}>Edit Ticket</button>
+                <button onClick={() => handleDeleteTicket}>Delete Ticket</button>
+              </div>
             )}
           </div>
         ) : (
           <form onSubmit={handleTicketUpdate}>
-            Title: <input type="text" value={editTicketData.title} onChange={(e) => setEditTicketData({ ...editTicketData, title: e.target.value })} required />
-            Description: <textarea value={editTicketData.description} onChange={(e) => setEditTicketData({ ...editTicketData, description: e.target.value })} required />
-            Status: <select value={editTicketData.status} onChange={(e) => setEditTicketData({ ...editTicketData, status: e.target.value })}>
+            <strong>Title: </strong><input type="text" value={editTicketData.title} onChange={(e) => setEditTicketData({ ...editTicketData, title: e.target.value })} required />
+            <strong>Description: </strong><textarea value={editTicketData.description} onChange={(e) => setEditTicketData({ ...editTicketData, description: e.target.value })} required />
+            <strong>Status: </strong><select value={editTicketData.status} onChange={(e) => setEditTicketData({ ...editTicketData, status: e.target.value })}>
               <option value="open">Open</option>
               <option value="in_progress">In Progress</option>
               <option value="resolved">Resolved</option>
               <option value="closed">Closed</option>
             </select>
-            Priority: <select value={editTicketData.priority} onChange={(e) => setEditTicketData({ ...editTicketData, priority: e.target.value })}>
+            <strong>Priority: </strong><select value={editTicketData.priority} onChange={(e) => setEditTicketData({ ...editTicketData, priority: e.target.value })}>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
               <option value="urgent">Urgent</option>
             </select>
-            Impact: <select value={editTicketData.impact} onChange={(e) => setEditTicketData({ ...editTicketData, impact: e.target.value })}>
+            <strong>Impact: </strong><select value={editTicketData.impact} onChange={(e) => setEditTicketData({ ...editTicketData, impact: e.target.value })}>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            Department: <input type="text" value={editTicketData.department} onChange={(e) => setEditTicketData({ ...editTicketData, department: e.target.value })} required />
+            <strong>Department: </strong><input type="text" value={editTicketData.department} onChange={(e) => setEditTicketData({ ...editTicketData, department: e.target.value })} required />
             <button type="submit">Save</button>
             <button type="button" onClick={() => setTicketEditing(false)}>Cancel</button>
           </form>
@@ -208,15 +223,18 @@ const TicketNotesAndDetailsPage = () => {
 
         {/* Notes List */}
         <div>
+          <hr />
           <h3>Notes</h3>
+
+          <br></br>
           <ul>
             {notes.map(note => (
               (note.note_type !== 'work_note' || userInfo.is_support_staff) && (
-                <li key={note.id} className={''}>
+                <li key={note.id} className={`note-bubble ${note.is_support_staff ? 'note-admin' : 'note-customer'}`}>
                   {console.log(note)}
                   {console.log(user.is_support_staff)}
                   <div>
-                    <strong>{note.user}</strong> <em>({note.note_type.replace('_', ' ')}){note.note_type == 'work_note' && '🔧'}</em><br />
+                    <strong>{note.user}</strong> <em>({note.note_type.replace('_', ' ')}){note.note_type == 'work_note' && '🔧🛠️🪛'}</em><br />
                     {editingNoteId === note.id ? (
                       <>
                         <textarea
@@ -227,7 +245,7 @@ const TicketNotesAndDetailsPage = () => {
                         <button onClick={() => setEditingNoteId(null)}>Cancel</button>
                       </>
                     ) : (
-                      <>
+                      <div>
                         {note.content}<br />
                         <small>{new Date(note.created_at).toLocaleString()}</small>
                         {userInfo.is_support_staff && (
@@ -239,7 +257,7 @@ const TicketNotesAndDetailsPage = () => {
                             <button onClick={() => handleDeleteNote(note.id)}>Delete</button>
                           </>
                         )}
-                      </>
+                      </div>
                     )}
                   </div>
                 </li>

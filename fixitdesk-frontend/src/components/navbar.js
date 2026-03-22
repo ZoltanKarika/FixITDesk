@@ -64,7 +64,7 @@ const NavBar = () => {
             <Link to="/statistics">📊 Statistics</Link>
           </li>
           {user?.is_support_staff && <li>
-            <Link to="/admin/users">🙍‍♀️🙍‍♂️Manage Users</Link>
+            <Link to="/admin/users">👥 Manage Users</Link>
           </li>}
           <li>
             <Link to="/accounts/logout">➡️🚪Logout</Link>

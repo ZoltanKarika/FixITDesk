@@ -9,7 +9,7 @@ import { useUserHandler } from "./UserHandler";
 
 const Rootpage = () => {
   const { loginHandler } = useUserHandler();
-  const [rightActive, setRightActive] = useState(false);// for Design
+  const [rightActive, setRightActive] = useState(false);
   const [loginFormData, setLoginFormData] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState("");
   const navigate = useNavigate();
@@ -56,7 +56,6 @@ const Rootpage = () => {
       console.error(loginError);
       setLoginError("Error logging in");
       setLoginFormData({ username: "", password: "" });
-
     }
   };
 
@@ -82,6 +81,7 @@ const Rootpage = () => {
         department: "",
         is_support_staff: false,
       });
+      navigate('/');
     } catch (regError) {
       setRegFormData({
         username: "",

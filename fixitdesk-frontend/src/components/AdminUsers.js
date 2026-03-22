@@ -46,7 +46,7 @@ const AdminUsersSecond = () => {
 
     const handleRowClick = (u) => {
         if (editingId === u.id) return;
-        //if (u.username === user.username) return;
+        if (u.username === user.username) return;
         setEditingId(u.id);
         setEditForm({
             username: u.username,

@@ -18,7 +18,7 @@ import Statistics from './components/Statistics';
 
 const App = () => {
   return (
-    <div>
+    <div className='wrapper'>
       <Routes>
         <Route path="/gatekeeper" element={<Rootpage />} />
         <Route element={<InnerLayout />}>

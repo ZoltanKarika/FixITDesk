@@ -4,10 +4,9 @@ body {
 }
 
 .wrapper {
-
-  width: 100%;
+  width: auto;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   background: linear-gradient(270deg, rgb(13, 28, 143), rgb(10, 10, 146), rgb(30, 30, 225), rgb(38, 38, 166), rgb(77, 77, 183));
   min-height: 100vh;
 
