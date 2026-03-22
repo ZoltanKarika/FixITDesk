@@ -24,11 +24,6 @@ class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
 
 
-
-
-
-
-
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -193,8 +188,10 @@ class WhoAmIView(APIView):
 
     def get(self, request):
         return Response({''
+        'id': request.user.id,
         'username': request.user.username,
-        'is_support_staff' :request.user.is_support_staff})
+        'is_support_staff' :request.user.is_support_staff,
+        'department': request.user.department})
 
 
 class CookieTokenRefreshView(TokenRefreshView):

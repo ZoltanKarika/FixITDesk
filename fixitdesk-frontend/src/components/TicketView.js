@@ -173,7 +173,7 @@ const TicketNotesAndDetailsPage = () => {
             {userInfo.is_support_staff && (
               <div className='gap'>
                 <button onClick={() => setTicketEditing(true)}>Edit Ticket</button>
-                <button onClick={() => handleDeleteTicket}>Delete Ticket</button>
+                <button onClick={handleDeleteTicket}>Delete Ticket</button>
               </div>
             )}
           </div>

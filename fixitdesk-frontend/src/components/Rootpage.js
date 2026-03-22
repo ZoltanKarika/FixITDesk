@@ -34,7 +34,7 @@ const Rootpage = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload
     try {
-      console.log("Sending login request:", loginFormData);
+      console.log("Sending login request");
 
       const response = await api.post(
         `/api/accounts/login/`,
@@ -46,7 +46,7 @@ const Rootpage = () => {
           withCredentials: true,
         }
       );
-      console.log("Login successful:", response.data); // undefined lesz?
+      console.log("Login successful"); // undefined lesz?
 
       const whoami = await api.get('/api/accounts/whoami/');
       loginHandler(whoami.data);

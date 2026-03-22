@@ -48,27 +48,6 @@ const NewTickets = () => {
     checkUser().then(fetchTickets);
   }, [navigate]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div className="dashboard-page p-top">
 
@@ -101,6 +80,9 @@ const NewTickets = () => {
                       Short Description
                     </td>
                     <td>
+                      Department
+                    </td>
+                    <td>
                       State
                     </td>
                   </tr>
@@ -115,7 +97,6 @@ const NewTickets = () => {
                     <tr>
                       <td>
                         {ticket.id}
-                        {console.log(ticket)}
                       </td>
                       <td>
                         {ticket.username}
@@ -123,6 +104,9 @@ const NewTickets = () => {
                       <td>
                         {ticket.title}
                         {ticket.unread_count > 0 && <span className="unread-dot"></span>}
+                      </td>
+                      <td>
+                        {ticket.department}
                       </td>
                       <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : ticket.status === 'resolved' ? 'green' : 'grey'}>
                         {ticket.status}

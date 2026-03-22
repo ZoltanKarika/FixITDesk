@@ -15,7 +15,7 @@ const SubmitTicket = () => {
   const [status, setStatus] = useState('open');
   const [priority, setPriority] = useState('low');
   const [impact, setImpact] = useState('low');
-  const [department, setDepartment] = useState('');
+  const [department, setDepartment] = useState(user?.department || '');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const SubmitTicket = () => {
         }
         throw new Error('Failed to submit the ticket');
       }
-
+      console.log("user data: " + user);
       const data = await response.json();
       if (data && data.id) {
         navigate('/tickets');
@@ -72,16 +72,18 @@ const SubmitTicket = () => {
               required
             />
           </div>
-          <div>
-            <label htmlFor="department">Department:</label>
-            <input
-              type="text"
-              id="department"
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-              required
-            />
-          </div>
+          {user?.is_support_staff ? (
+            <div>
+              <label htmlFor="department">Department:</label>
+              <input
+                type="text"
+                id="department"
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+                required
+              />
+            </div>
+          ) : null}
           <div>
             <label htmlFor="type">Type:</label>
             <select
