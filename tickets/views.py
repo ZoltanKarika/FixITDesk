@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions
-from .models import Ticket, Note
+from .models import Ticket, Note, NoteRead
 from .serializers import TicketSerializer, NoteSerializer
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
@@ -95,11 +95,14 @@ def mark_notes_read(request, ticket_id):
     if ticket.user != request.user and not request.user.is_support_staff:
         return Response({'error': 'Permission denied'}, status=403)
     
-    Note.objects.filter(
-        ticket_id=ticket_id
-    ).exclude(
-        user=request.user
-    ).update(is_read=True)
+    notes = Note.objects.filter(ticket_id=ticket_id).exclude(user=request.user)
+    
+    if not request.user.is_support_staff:
+        notes = notes.filter(note_type='customer_note')
+    
+    for note in notes:
+        NoteRead.objects.get_or_create(note=note, user=request.user)
+    
     return Response({'status': 'ok'})
 #Notification api
 
