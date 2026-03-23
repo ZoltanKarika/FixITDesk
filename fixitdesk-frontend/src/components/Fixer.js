@@ -94,7 +94,7 @@ export const Fixer = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyPress}
-            placeholder="Írj valamit..."
+            placeholder="Write something..."
             disabled={isLoading}
           />
           <button
