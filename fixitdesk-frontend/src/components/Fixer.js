@@ -101,7 +101,7 @@ export const Fixer = () => {
             onClick={sendMessage}
             disabled={isLoading || !input.trim()}
           >
-            {isLoading ? '...' : 'Sending'}
+            {isLoading ? '...' : 'Send'}
           </button>
         </div>
       </div>

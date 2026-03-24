@@ -159,6 +159,7 @@ const TicketNotesAndDetailsPage = () => {
           <div>
             <p>User: {ticket.username}</p>
             <p><strong>Title:</strong> {ticket.title}</p>
+            <p><strong>Type:</strong> {ticket.type}</p>
             <p><strong>Description:</strong> {ticket.description}</p>
             <p><strong>Status:</strong> {ticket.status}</p>
             <p><strong>Priority:</strong> {ticket.priority}</p>
