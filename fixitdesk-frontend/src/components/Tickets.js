@@ -92,7 +92,8 @@ const NewTickets = () => {
                     t.title?.toLowerCase().includes(search.toLowerCase()) ||
                     t.username?.toLowerCase().includes(search.toLowerCase()) ||
                     t.status?.toLowerCase().includes(search.toLowerCase()) ||
-                    String(t.id)?.includes(search)
+                    String(t.id)?.includes(search)||
+                    t.department.toLowerCase().includes(search.toLowerCase())
                   ).map(ticket => (
                     <tr className={ticket.unread_count > 0 ? 'marked-tr' : ''}>
                       <td>

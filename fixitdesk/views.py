@@ -16,8 +16,12 @@ def aichat(request):
     try:
         data = json.loads(request.body)
         user_message = data.get('message', '')
+        if not settings.MISTRAL_API_KEY:
+            return JsonResponse({
+            "error": "API OR .env FILE IS MISSING - MR.FIXER IS DOWN ☹️"
+        }, status=503)
 
-        # A Mistral kulcsod és az URL
+   
         API_KEY = settings.MISTRAL_API_KEY
         API_URL = "https://api.mistral.ai/v1/chat/completions"
 

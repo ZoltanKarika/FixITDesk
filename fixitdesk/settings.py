@@ -204,4 +204,7 @@ SIMPLE_JWT = {
 }
 
 
-MISTRAL_API_KEY = config('MISTRAL_API_KEY')
+MISTRAL_API_KEY = config('MISTRAL_API_KEY', default=None)
+
+if not MISTRAL_API_KEY:
+    print("API is not set up, chatbot is down.")

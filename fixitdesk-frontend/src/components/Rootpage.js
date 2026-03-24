@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import api from './api';
 import '../css/rootpage.css';
 import '../css/animations.css';
+//import '../index.css';
 
 import { useUserHandler } from "./UserHandler";
 
 
 const Rootpage = () => {
-  const { loginHandler } = useUserHandler();
+  const { loginHandler } = useUserHandler();// language, setLanguage
   const [rightActive, setRightActive] = useState(false);
   const [loginFormData, setLoginFormData] = useState({ username: "", password: "" });
   const [loginError, setLoginError] = useState("");
@@ -90,12 +91,18 @@ const Rootpage = () => {
         department: "",
         is_support_staff: false,
       });
-      setRegError("Error registering user");
+      setRegError("Error registering user - password must be at least 8 characters");
     }
   };
 
   return (
     <>
+      {/*<button
+        className="lang-toggle"
+        onClick={() => setLanguage(language === 'hu' ? 'en' : 'hu')}
+      >
+        {language === 'hu' ? '🇭🇺' : '🇬🇧'}
+      </button>*/}
       <div className="root-wrap">
         <div className={`container ${rightActive ? "right-panel-active" : ""}`}>
           <div className="form-cont log-in-cont">

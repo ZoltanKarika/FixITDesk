@@ -5,6 +5,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [unreadCount, setUnreadCount] = useState(0);
+    //const [language, setLanguage] = useState('en');
     const [user, setUser] = useState(() => {
         try {
             return JSON.parse(localStorage.getItem('user')) || null;
@@ -47,7 +48,7 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser, loginHandler, logoutHandler, unreadCount, refreshUnreadCount }}>
+        <UserContext.Provider value={{ user, setUser, loginHandler, logoutHandler, unreadCount, refreshUnreadCount}}>{/*language, setLanguage */}
             {children}
         </UserContext.Provider>
     );
