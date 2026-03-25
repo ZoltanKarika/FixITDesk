@@ -97,54 +97,61 @@ const Statistics = () => {
                 <div className='stat-charts-row'>
                     {/* Kördiagram - státusz */}
                     <div className='stat-panel stat-chart-panel'>
-                        <h2 className='stat-section-title'>By Status</h2>
-                        <ResponsiveContainer width="100%" height={260}>
-                            <PieChart>
-                                <Pie
-                                    data={statusData}
-                                    cx="50%"
-                                    cy="50%"
-                                    innerRadius={60}
-                                    outerRadius={100}
-                                    paddingAngle={3}
-                                    dataKey="value"
-                                >
-                                    {statusData.map((entry) => (
-                                        <Cell key={entry.key} fill={STATUS_COLORS[entry.key]} />
-                                    ))}
-                                </Pie>
-                                <Tooltip
-                                    contentStyle={{ background: 'rgba(10,10,40,.9)', border: '1px solid rgba(255,255,255,.15)', borderRadius: 10 }}
-                                    labelStyle={{ color: 'white' }}
-                                    itemStyle={{ color: 'white' }}
-                                />
-                                <Legend
-                                    formatter={(value) => <span style={{ color: 'rgba(255,255,255,.7)' }}>{value}</span>}
-                                />
-                            </PieChart>
-                        </ResponsiveContainer>
+                        <div style={{ padding: '0 0 8px 0    ' }}>
+                            <h2 className='stat-section-title'>By Status</h2></div>
+                        <div style={{ flex: 1 }}>
+                            <ResponsiveContainer width="100%" height={260}>
+                                <PieChart>
+                                    <Pie
+                                        data={statusData}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={60}
+                                        outerRadius={100}
+                                        paddingAngle={3}
+                                        dataKey="value"
+                                    >
+                                        {statusData.map((entry) => (
+                                            <Cell key={entry.key} fill={STATUS_COLORS[entry.key]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip
+                                        contentStyle={{ background: 'rgba(10,10,40,.9)', border: '1px solid rgba(255,255,255,.15)', borderRadius: 10 }}
+                                        labelStyle={{ color: 'white' }}
+                                        itemStyle={{ color: 'white' }}
+                                    />
+                                    <Legend
+                                        formatter={(value) => <span style={{ color: 'rgba(255,255,255,.7)' }}>{value}</span>}
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
 
                     {/* Oszlopdiagram - prioritás */}
                     <div className='stat-panel stat-chart-panel'>
-                        <h2 className='stat-section-title'>By Priority</h2>
-                        <ResponsiveContainer width="100%" height={260}>
-                            <BarChart data={priorityData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,.08)" />
-                                <XAxis dataKey="name" tick={{ fill: 'rgba(255,255,255,.6)', fontSize: 13 }} />
-                                <YAxis tick={{ fill: 'rgba(255,255,255,.6)', fontSize: 13 }} allowDecimals={false} />
-                                <Tooltip
-                                    contentStyle={{ background: 'rgba(10,10,40,.9)', border: '1px solid rgba(255,255,255,.15)', borderRadius: 10 }}
-                                    labelStyle={{ color: 'white' }}
-                                    itemStyle={{ color: 'white' }}
-                                />
-                                <Bar dataKey="value" radius={[6, 6, 0, 0]}>
-                                    {priorityData.map((entry) => (
-                                        <Cell key={entry.key} fill={PRIORITY_COLORS[entry.key]} />
-                                    ))}
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
+                        <div style={{ padding: '0 0 8px 0    ' }}>
+                            <h2 className='stat-section-title'>By Priority</h2></div>
+                        <div style={{ flex: 1 }}>
+                            <ResponsiveContainer width="100%" height={260}>
+
+                                <BarChart data={priorityData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,.08)" />
+                                    <XAxis dataKey="name" tick={{ fill: 'rgba(255,255,255,.6)', fontSize: 13 }} />
+                                    <YAxis tick={{ fill: 'rgba(255,255,255,.6)', fontSize: 13 }} allowDecimals={false} />
+                                    <Tooltip
+                                        contentStyle={{ background: 'rgba(10,10,40,.9)', border: '1px solid rgba(255,255,255,.15)', borderRadius: 10 }}
+                                        labelStyle={{ color: 'white' }}
+                                        itemStyle={{ color: 'white' }}
+                                    />
+                                    <Bar dataKey="value" radius={[6, 6, 0, 0]}>
+                                        {priorityData.map((entry) => (
+                                            <Cell key={entry.key} fill={PRIORITY_COLORS[entry.key]} />
+                                        ))}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
             </div>
