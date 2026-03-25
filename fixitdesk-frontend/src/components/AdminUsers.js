@@ -115,7 +115,7 @@ const AdminUsersSecond = () => {
                     <h1>Users</h1>
                     {saveError && <p style={{ color: 'red' }}>{saveError}</p>}
                     <p className='admin-hint'>Click on a line to modify. <span className="error-message">Own account can not be modified!</span></p>
-                    <div className='admin-user-lines'>
+                    <div className='admin-user-lines enter'>
                         <table>
                             <thead>
                                 <tr>

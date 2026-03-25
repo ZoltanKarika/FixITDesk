@@ -66,7 +66,7 @@ const NewTickets = () => {
           {tickets.length === 0 ? (
             <p>No tickets available.</p>
           ) : (
-            <div className="table-panel">
+            <div className="table-panel enter">
               <table>
                 <thead>
                   <tr>
