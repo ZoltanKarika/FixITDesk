@@ -6,7 +6,7 @@ class User(AbstractUser):
     is_support_staff = models.BooleanField(default=False)
     
     
-    def save(self, *args, **kwargs):# menti a superuser-t is_staff-nak
+    def save(self, *args, **kwargs):
         if self.is_superuser:
             self.is_support_staff = True
         super().save(*args, **kwargs)

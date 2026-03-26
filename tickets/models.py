@@ -91,7 +91,7 @@ class Note(models.Model):
 
     def __str__(self):
         return f"{self.ticket.title} by {self.user.username} at {self.created_at}"
-       # return f"{self.get_note_type_display()} on {self.ticket.title} by {self.user.username} at {self.created_at}"
+    
 
 class NoteRead(models.Model):
     note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='reads')

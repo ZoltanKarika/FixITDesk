@@ -5,11 +5,10 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from django.utils import timezone
+from datetime import timedelta
 
 class IsSupportStaffOrOwner(permissions.BasePermission):
-    """
-    Custom permission to only allow support staff or the ticket owner to view/edit/delete a ticket.
-    """
     def has_object_permission(self, request, view, obj):
         if request.user.is_support_staff:  # Support staff can always access
             return True
@@ -23,12 +22,19 @@ class TicketListCreateView(generics.ListCreateAPIView):
     def get_queryset(self):
         user = self.request.user
         queryset = Ticket.objects.all()
-        
-        # Allow support staff to see all tickets
+          
+        if user.is_support_staff:
+            limit = timezone.now() - timedelta(days=15)                            # clean up old closed tickets (support staff request)
+            Ticket.objects.filter(
+                status='closed',
+                updated_at__lt=limit
+            ).delete()
+      
+                                                                                # Allow support staff to see all tickets
         if user.is_support_staff:
             status = self.request.query_params.get('status', None)
             if status:
-                queryset = queryset.filter(status=status)  # Filtering by status if passed
+                queryset = queryset.filter(status=status)                         # Filtering by status if passed
         else:
             queryset = Ticket.objects.filter(user=user).exclude(status='closed')  # Regular users can only see their own tickets
 

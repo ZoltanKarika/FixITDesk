@@ -2,16 +2,13 @@ import requests
 import json
 import os
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from django.conf import settings
 
 import requests
 import json
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
 def aichat(request):
     try:
         data = json.loads(request.body)
@@ -50,17 +47,16 @@ def aichat(request):
             "temperature": 0.7 
         }
 
-        response = requests.post(API_URL, json=payload, headers=headers)
+        response = requests.post(API_URL, json=payload, headers=headers, timeout=30)
         res_data = response.json()
 
-        # HIBAKEZELÉS: Ha a Mistral dob hibát
+   
         if "error" in res_data:
             return JsonResponse({"error": res_data["error"]["message"]}, status=400)
 
-        # A Mistral válaszát így kell kicsomagolni:
         ai_text = res_data['choices'][0]['message']['content']
         
-        return JsonResponse({"reply": ai_text}) # 'reply' kulccsal küldjük vissza
+        return JsonResponse({"reply": ai_text}) 
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
