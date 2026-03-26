@@ -41,7 +41,7 @@ const NewTickets = () => {
         updateUnreadCount(total);
 
       } catch (error) {
-        console.error('Error fetching tickets:', error);
+        console.error('Error fetching tickets:', error);  
       }
     };
 

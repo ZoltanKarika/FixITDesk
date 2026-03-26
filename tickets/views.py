@@ -30,7 +30,7 @@ class TicketListCreateView(generics.ListCreateAPIView):
             if status:
                 queryset = queryset.filter(status=status)  # Filtering by status if passed
         else:
-            queryset = Ticket.objects.filter(user=user)  # Regular users can only see their own tickets
+            queryset = Ticket.objects.filter(user=user).exclude(status='closed')  # Regular users can only see their own tickets
 
         return queryset
 
@@ -108,32 +108,3 @@ def mark_notes_read(request, ticket_id):
 
 
 
-'''(így tulajdonos törölheti a saját ticket-jét, visszavonhatja, status-t, módosítást csak support staff végezhet)
-class IsSupportStaffOrOwner(permissions.BasePermission):
-    def has_object_permission(self, request, view, obj):
-        # Olvasás - saját ticketedet láthatod, staff mindent
-        if request.method == 'GET':
-            if request.user.is_support_staff:
-                return True
-            return obj.user == request.user
-        
-        # Törlés - a tulajdonos is törölheti a sajátját
-        if request.method == 'DELETE':
-            if request.user.is_support_staff:
-                return True
-            return obj.user == request.user
-        
-        # Módosítás - csak support staff
-        if request.method in ['PUT', 'PATCH']:
-            return request.user.is_support_staff
-
-
-class TicketRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Ticket.objects.all()
-    serializer_class = TicketSerializer
-    permission_classes = [permissions.IsAuthenticated, IsSupportStaffOrOwner]
-
-    def get_object(self):
-        ticket = super().get_object()
-        return ticket
-'''

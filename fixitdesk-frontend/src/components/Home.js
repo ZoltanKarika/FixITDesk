@@ -74,7 +74,7 @@ const Home = () => {
   ];
 
   return (
-    <div className='p-top enter home-wrap'>
+    <div className='p-top enter home-wrap pad10'>
       <div className='home-welcome'>
         <h1>Welcome, {user ? user.username : 'Guest'}!</h1>
         <p>This is the homepage of the FixIT ticket management. Check the instructions below!</p>

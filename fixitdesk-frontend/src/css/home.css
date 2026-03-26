@@ -6,6 +6,7 @@
 
 .home-welcome {
     margin-bottom: 36px;
+
 }
 
 .home-welcome h1 {
@@ -70,4 +71,8 @@
     color: rgba(255, 255, 255, .55);
     line-height: 1.6;
     margin: 0;
+}
+
+.pad10{
+  padding:10px;
 }

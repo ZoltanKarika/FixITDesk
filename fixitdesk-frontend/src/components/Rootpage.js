@@ -82,7 +82,9 @@ const Rootpage = () => {
         department: "",
         is_support_staff: false,
       });
+      alert("Registration Successful!")
       navigate('/');
+
     } catch (regError) {
       setRegFormData({
         username: "",
