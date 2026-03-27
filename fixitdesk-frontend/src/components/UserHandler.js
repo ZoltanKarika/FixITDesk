@@ -14,13 +14,11 @@ export const UserProvider = ({ children }) => {
         }
     });
 
-
     useEffect(() => {
         if (user) {
             refreshUnreadCount();
         }
     }, [user]);
-
 
     const refreshUnreadCount = async () => {
         if (!user) return;

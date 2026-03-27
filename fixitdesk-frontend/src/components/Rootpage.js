@@ -33,7 +33,7 @@ const Rootpage = () => {
   };
 
   const handleLoginSubmit = async (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
     try {
       console.log("Sending login request");
 
@@ -47,7 +47,7 @@ const Rootpage = () => {
           withCredentials: true,
         }
       );
-      console.log("Login successful"); // undefined lesz?
+      console.log("Login successful"); 
 
       const whoami = await api.get('/api/accounts/whoami/');
       loginHandler(whoami.data);

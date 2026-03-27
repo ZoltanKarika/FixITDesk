@@ -29,8 +29,8 @@ yarn-error.log*
 venv/
 __pycache__/
 *.py[cod]
-*.sqlite3
-.env
+#*.sqlite3              -   !!!EZEK EGYEDÜL A VIZSGA MIATT KERÜLNEK FEL!!!
+#.env                   -   !!!EZEK EGYEDÜL A VIZSGA MIATT KERÜLNEK FEL!!!
 *.log
 
 # Django static / media (local only)
