@@ -24,7 +24,7 @@ class TicketListCreateView(generics.ListCreateAPIView):
         queryset = Ticket.objects.all()
           
         if user.is_support_staff:
-            limit = timezone.now() - timedelta(days=15)                            # clean up old closed tickets (support staff request)
+            limit = timezone.now() - timedelta(days=21)                            # clean up old closed tickets (support staff request)
             Ticket.objects.filter(
                 status='closed',
                 updated_at__lt=limit
