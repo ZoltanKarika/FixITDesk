@@ -149,7 +149,11 @@
   font-weight: bold;
 }
 
-
+.red {
+  color: rgb(255, 0, 0);
+  box-shadow: none;
+  font-weight: bold;
+}
 /*Search*/
 .search-input {
   width: 100%;

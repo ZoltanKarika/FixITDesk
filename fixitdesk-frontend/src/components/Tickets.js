@@ -41,7 +41,7 @@ const NewTickets = () => {
         updateUnreadCount(total);
 
       } catch (error) {
-        console.error('Error fetching tickets:', error);  
+        console.error('Error fetching tickets:', error);
       }
     };
 
@@ -83,6 +83,9 @@ const NewTickets = () => {
                       Department
                     </td>
                     <td>
+                      Priority
+                    </td>
+                    <td>
                       State
                     </td>
                   </tr>
@@ -92,10 +95,11 @@ const NewTickets = () => {
                     t.title?.toLowerCase().includes(search.toLowerCase()) ||
                     t.username?.toLowerCase().includes(search.toLowerCase()) ||
                     t.status?.toLowerCase().includes(search.toLowerCase()) ||
-                    String(t.id)?.includes(search)||
-                    t.department.toLowerCase().includes(search.toLowerCase())
+                    String(t.id)?.includes(search) ||
+                    t.department?.toLowerCase().includes(search.toLowerCase()) ||
+                    t.priority?.toLowerCase().includes(search.toLowerCase())
                   ).map(ticket => (
-                    <tr className={ticket.unread_count > 0 ? 'marked-tr' : ''}>
+                    <tr className={ticket.unread_count > 0 ? 'marked-tr' : ''} >
                       <td>
                         {ticket.id}
                       </td>
@@ -108,6 +112,9 @@ const NewTickets = () => {
                       </td>
                       <td>
                         {ticket.department}
+                      </td>
+                      <td className={ticket.priority === 'low' ? 'grey' : ticket.priority === 'medium' ? 'blue' : ticket.priority === 'high' ? 'orange' : 'red'}>
+                        {ticket.priority}
                       </td>
                       <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : ticket.status === 'resolved' ? 'green' : 'grey'}>
                         {ticket.status}
