@@ -21,7 +21,7 @@ const NavBar = () => {
         <ul>
           <li><img src={logo} alt="FixIT-logo" className="logo" /></li>
           <li className="hideOnMobile">
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
           </li>
           <li className="hideOnMobile">
             <Link to="/tickets">Tickets {unreadCount > 0 && <span className="nav-badge">{unreadCount}</span>}</Link>
@@ -48,7 +48,7 @@ const NavBar = () => {
         <ul className="sidebar">
           <li onClick={hideSidebar} ><svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="45px" fill="#1f1f1f"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></li>
           <li>
-            <Link to="/">🏠Home</Link>
+            <Link to="/home">🏠Home</Link>
           </li>
           <li>
             <Link to="/tickets">🎫 Tickets {unreadCount > 0 && <span className="nav-badge">{unreadCount}</span>}</Link>

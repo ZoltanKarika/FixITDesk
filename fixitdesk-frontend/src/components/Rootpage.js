@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from './api';
 import '../css/rootpage.css';
 import '../css/animations.css';
-//import '../index.css';
+
 
 import { useUserHandler } from "./UserHandler";
 
@@ -37,7 +37,7 @@ const Rootpage = () => {
     try {
       console.log("Sending login request");
 
-      const response = await api.post(
+      await api.post(
         `/api/accounts/login/`,
         {
           username: loginFormData.username,
@@ -52,7 +52,7 @@ const Rootpage = () => {
       const whoami = await api.get('/api/accounts/whoami/');
       loginHandler(whoami.data);
 
-      navigate('/');
+      navigate('/home');
     } catch (loginError) {
       console.error(loginError);
       setLoginError("Error logging in");
@@ -83,7 +83,7 @@ const Rootpage = () => {
         is_support_staff: false,
       });
       alert("Registration Successful!")
-      navigate('/');
+      navigate('/home');
 
     } catch (regError) {
       setRegFormData({
