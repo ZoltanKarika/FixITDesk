@@ -149,12 +149,44 @@
   font-weight: bold;
 }
 
-.red {
-  color: rgb(255, 0, 0);
+
+
+.low {
+  color: #60a5fa;
   box-shadow: none;
   font-weight: bold;
 }
-/*Search*/
+
+.medium {
+  color: #f59e0b;
+  box-shadow: none;
+  font-weight: bold;
+}
+
+.high {
+  color: #f87171;
+  box-shadow: none;
+  font-weight: bold;
+}
+
+.urgent {
+  color: #dc2626;
+  box-shadow: none;
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .search-input {
   width: 100%;
   margin-bottom: 14px;
@@ -174,7 +206,7 @@
 }
 
 
-/*Notification*/
+
 .marked-tr {
   background: rgba(213, 52, 52, 0.3);
 }

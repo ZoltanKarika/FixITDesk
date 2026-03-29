@@ -24,17 +24,31 @@ async function request(path, { method = 'GET', body = null, headers = {}, ...cus
     options.body = JSON.stringify(body);
   }
 
-  let response = await fetch(`${API_URL}${path}`, options);
+  let response;
+  try {
+    response = await fetch(`${API_URL}${path}`, options);
+  } catch (err) {
+    // Hálózati hiba (nincs net, szerver nem elérhető, stb.)
+    throw new Error('Error! Check your internet connection!');
+  }
 
   if (response.status === 401) {
-    const refreshResponse = await fetch(`${API_URL}/api/token/refresh/`, {
-      method: 'POST',
-      credentials: 'include',
-    });
-    console.log("REFRESHED");
+    let refreshResponse;
+    try {
+      refreshResponse = await fetch(`${API_URL}/api/token/refresh/`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (err) {
+      throw new Error('Error! Check your internet connection!');
+    }
 
     if (refreshResponse.ok) {
-      response = await fetch(`${API_URL}${path}`, options);
+      try {
+        response = await fetch(`${API_URL}${path}`, options);
+      } catch (err) {
+        throw new Error('Error! Check your internet connection!');
+      }
     } else {
       throw new Error('Session expired');
     }

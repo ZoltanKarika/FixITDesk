@@ -30,8 +30,8 @@ venv/
 __pycache__/
 *.py[cod]
 *.sqlite3
-.env
-.env.*
+#.env -   !!!EZEK EGYEDÜL A VIZSGA MIATT KERÜLNEK FEL!!!
+#.env.*
 *.log
 
 # Django static / media (local only)

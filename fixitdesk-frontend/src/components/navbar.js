@@ -6,7 +6,7 @@ import { useUserHandler } from "./UserHandler";
 
 
 const NavBar = () => {
-  const { user, loginHandler, logoutHandler, unreadCount } = useUserHandler();
+  const { user, unreadCount } = useUserHandler();
   function showSidebar() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.style.display = 'flex';

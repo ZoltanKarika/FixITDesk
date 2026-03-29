@@ -44,10 +44,6 @@ const TicketNotesAndDetailsPage = () => {
     checkUser();
   }, [navigate]);
 
-
-
-
-  // Fetch ticket and notes + read ticket
   useEffect(() => {
     const fetchTicketAndNotes = async () => {
       try {
@@ -74,7 +70,6 @@ const TicketNotesAndDetailsPage = () => {
     fetchTicketAndNotes();
   }, [ticketId]);
 
-  // Ticket update (only admins)
   const handleTicketUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -91,7 +86,7 @@ const TicketNotesAndDetailsPage = () => {
     }
   };
 
-  // Notes CRUD
+
   const handleAddNote = async () => {
     try {
       const response = await api.post(`/api/tickets/${ticketId}/notes/`, {
@@ -201,7 +196,7 @@ const TicketNotesAndDetailsPage = () => {
 
         <hr />
 
-        {/* New Note */}
+
         <div>
           <h3>Add a Note</h3>
           <textarea
@@ -218,7 +213,7 @@ const TicketNotesAndDetailsPage = () => {
           <button onClick={handleAddNote}>Add Note</button>
         </div>
 
-        {/* Notes List */}
+ 
         <div>
           <hr />
           <h3>Notes</h3>

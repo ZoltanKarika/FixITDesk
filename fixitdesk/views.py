@@ -2,23 +2,19 @@ import requests
 import json
 import os
 from django.http import JsonResponse
-from django.views.decorators.http import require_http_methods
 from django.conf import settings
-
-import requests
-import json
-from django.http import JsonResponse
+from requests.exceptions import ConnectionError, Timeout, RequestException
 
 def aichat(request):
     try:
         data = json.loads(request.body)
         user_message = data.get('message', '')
+        
         if not settings.MISTRAL_API_KEY:
             return JsonResponse({
-            "error": "API OR .env FILE IS MISSING - MR.FIXER IS DOWN ☹️"
-        }, status=503)
+                "error": "API OR .env FILE IS MISSING - MR.FIXER IS DOWN ☹️"
+            }, status=503)
 
-   
         API_KEY = settings.MISTRAL_API_KEY
         API_URL = "https://api.mistral.ai/v1/chat/completions"
 
@@ -47,16 +43,27 @@ def aichat(request):
             "temperature": 0.7 
         }
 
-        response = requests.post(API_URL, json=payload, headers=headers, timeout=30)
-        res_data = response.json()
+        try:
+            response = requests.post(API_URL, json=payload, headers=headers, timeout=30)
+            res_data = response.json()
+        except ConnectionError:
+            return JsonResponse({
+                "error": "Mr.Fixer is offline - no internet connection. 📡"
+            }, status=503)
+        except Timeout:
+            return JsonResponse({
+                "error": "Mr.Fixer is not responding - request timed out. ⏱️"
+            }, status=503)
+        except RequestException as e:
+            return JsonResponse({
+                "error": f"Network error: {str(e)}"
+            }, status=503)
 
-   
         if "error" in res_data:
             return JsonResponse({"error": res_data["error"]["message"]}, status=400)
 
         ai_text = res_data['choices'][0]['message']['content']
-        
-        return JsonResponse({"reply": ai_text}) 
+        return JsonResponse({"reply": ai_text})
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)

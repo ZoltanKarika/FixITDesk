@@ -113,7 +113,7 @@ const NewTickets = () => {
                       <td>
                         {ticket.department}
                       </td>
-                      <td className={ticket.priority === 'low' ? 'grey' : ticket.priority === 'medium' ? 'blue' : ticket.priority === 'high' ? 'orange' : 'red'}>
+                      <td className={ticket.priority === 'low' ? 'low' : ticket.priority === 'medium' ? 'medium' : ticket.priority === 'high' ? 'high' : 'urgent'}>
                         {ticket.priority}
                       </td>
                       <td className={ticket.status === 'open' ? 'orange' : ticket.status === 'in_progress' ? 'blue' : ticket.status === 'resolved' ? 'green' : 'grey'}>

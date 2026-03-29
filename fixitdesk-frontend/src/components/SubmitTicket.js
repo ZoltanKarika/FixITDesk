@@ -23,7 +23,7 @@ const SubmitTicket = () => {
     e.preventDefault();
 
     try {
-      // Make an API request to submit the ticket
+
       const response = await api.post('/api/tickets/', {
         title,
         description,
@@ -35,7 +35,6 @@ const SubmitTicket = () => {
         submitted_via: 'api'
       });
       if (!response.ok) {
-        // Handle different responses from the backend
         if (response.status === 401) {
           setError('You must be logged in to submit a ticket.');
           navigate('/gatekeeper');

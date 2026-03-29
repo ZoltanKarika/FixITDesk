@@ -5,7 +5,7 @@ import api from './api';
 import { useUserHandler } from './UserHandler';
 
 export const Fixer = () => {
-  const{user, loginHandler, logoutHandler} = useUserHandler();
+  const{user} = useUserHandler();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
