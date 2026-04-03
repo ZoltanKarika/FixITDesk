@@ -68,13 +68,13 @@ const Rootpage = () => {
   const handleRegSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Sending form data:", regFormData);
+      console.log("Sending form data");
       let response = await api.post('/api/accounts/register/', regFormData);
       if (!response.ok) {
         throw new Error("Registration failed");
       }
       const data = await response.json();
-      console.log("User registered:", data);
+      console.log("User registered:", data.username);
       setRegFormData({
         username: "",
         email: "",
